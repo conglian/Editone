@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eo_top_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Nf1-nC-DIO">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="421"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="421" id="p1i-5h-Hvp"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eo_top_logo" translatesAutoresizingMaskIntoConstraints="NO" id="voN-tf-n8u">
+                                <rect key="frame" x="154.66666666666666" y="206" width="84" height="84"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="84" id="5X3-0L-4rB"/>
+                                    <constraint firstAttribute="width" constant="84" id="wlU-B7-jhu"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eo_top_editone" translatesAutoresizingMaskIntoConstraints="NO" id="gsu-Oc-paD">
+                                <rect key="frame" x="159" y="308" width="75" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="S27-tc-0GE"/>
+                                    <constraint firstAttribute="width" constant="75" id="hmk-aV-aMG"/>
+                                </constraints>
+                            </imageView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.20000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="AZK-Yg-CFG">
+                                <rect key="frame" x="52" y="659" width="289" height="4"/>
+                                <color key="tintColor" red="0.45098039215686275" green="0.58431372549019611" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="hFP-c8-WtH"/>
+                                </constraints>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYH-S4-hiv">
+                                <rect key="frame" x="156.66666666666666" y="675" width="80" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Gtj-Tg-9mf"/>
+                                    <constraint firstAttribute="height" constant="18" id="He3-sn-RbY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="highlightedColor" systemColor="systemBackgroundColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" red="0.047058823529411764" green="0.058823529411764705" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Nf1-nC-DIO" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="2go-Ze-FHD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Nf1-nC-DIO" secondAttribute="trailing" id="4G8-5J-iHb"/>
+                            <constraint firstItem="voN-tf-n8u" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="88" id="8l9-re-AYW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="AZK-Yg-CFG" secondAttribute="bottom" constant="121" id="ENE-gn-zpN"/>
+                            <constraint firstItem="MYH-S4-hiv" firstAttribute="top" secondItem="AZK-Yg-CFG" secondAttribute="bottom" constant="12" id="ErZ-a7-HeY"/>
+                            <constraint firstItem="voN-tf-n8u" firstAttribute="centerX" secondItem="Nf1-nC-DIO" secondAttribute="centerX" id="GFT-3k-hZ2"/>
+                            <constraint firstItem="gsu-Oc-paD" firstAttribute="top" secondItem="voN-tf-n8u" secondAttribute="bottom" constant="18" id="HtW-HF-E8X"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AZK-Yg-CFG" secondAttribute="trailing" constant="52" id="cK8-Wk-WVD"/>
+                            <constraint firstItem="gsu-Oc-paD" firstAttribute="centerX" secondItem="voN-tf-n8u" secondAttribute="centerX" id="d2h-Gi-Acq"/>
+                            <constraint firstItem="AZK-Yg-CFG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="52" id="mor-ph-KYr"/>
+                            <constraint firstItem="Nf1-nC-DIO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nJP-Oy-Csh"/>
+                            <constraint firstItem="MYH-S4-hiv" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="weY-2H-bAp"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="260.30534351145036" y="224.64788732394368"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="eo_top_bg" width="375" height="421"/>
+        <image name="eo_top_editone" width="81" height="22.5"/>
+        <image name="eo_top_logo" width="80" height="80"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
