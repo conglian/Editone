@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EoLaunchProgressVC" customModule="Editone" customModuleProvider="target">
+            <connections>
+                <outlet property="progressView" destination="aQa-jC-7UC" id="C78-ai-0Oh"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eo_top_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Dox-DF-ddO">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="421"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="421" id="6AA-bc-LdM"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eo_top_logo" translatesAutoresizingMaskIntoConstraints="NO" id="oIe-bv-ikt">
+                    <rect key="frame" x="154.66666666666666" y="200" width="84" height="84"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="84" id="UsB-23-zS1"/>
+                        <constraint firstAttribute="width" constant="84" id="dge-Zw-8jz"/>
+                    </constraints>
+                </imageView>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aQa-jC-7UC">
+                    <rect key="frame" x="52" y="659" width="289" height="4"/>
+                    <color key="tintColor" red="0.45098039220000002" green="0.58431372550000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="4" id="b1Z-9a-lhg"/>
+                    </constraints>
+                </progressView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eo_top_editone" translatesAutoresizingMaskIntoConstraints="NO" id="dWt-U7-UTO">
+                    <rect key="frame" x="159" y="302" width="75" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="75" id="GqC-eV-862"/>
+                        <constraint firstAttribute="height" constant="28" id="Qxi-cf-wqe"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5RH-p3-R1f">
+                    <rect key="frame" x="156.66666666666666" y="675" width="80" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="MT1-hc-Pz4"/>
+                        <constraint firstAttribute="height" constant="18" id="puR-My-TqM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="highlightedColor" systemColor="systemBackgroundColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.047058823529411764" green="0.058823529411764705" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="dWt-U7-UTO" firstAttribute="centerX" secondItem="oIe-bv-ikt" secondAttribute="centerX" id="1eE-l5-wLc"/>
+                <constraint firstItem="5RH-p3-R1f" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="2N6-tT-FfY"/>
+                <constraint firstItem="Dox-DF-ddO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="3jD-Bt-dBm"/>
+                <constraint firstItem="oIe-bv-ikt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="200" id="4yl-Wo-4Lv"/>
+                <constraint firstItem="5RH-p3-R1f" firstAttribute="top" secondItem="aQa-jC-7UC" secondAttribute="bottom" constant="12" id="5El-4M-08H"/>
+                <constraint firstItem="dWt-U7-UTO" firstAttribute="top" secondItem="oIe-bv-ikt" secondAttribute="bottom" constant="18" id="Kvp-Xu-2Zf"/>
+                <constraint firstItem="oIe-bv-ikt" firstAttribute="centerX" secondItem="Dox-DF-ddO" secondAttribute="centerX" id="PhF-TK-nxH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="aQa-jC-7UC" secondAttribute="trailing" constant="52" id="To8-j0-zbP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="aQa-jC-7UC" secondAttribute="bottom" constant="121" id="eYl-mR-mNa"/>
+                <constraint firstItem="aQa-jC-7UC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="52" id="nZz-bO-Yoa"/>
+                <constraint firstItem="Dox-DF-ddO" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="pmx-yu-w7m"/>
+                <constraint firstItem="Dox-DF-ddO" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="y8D-tz-fJR"/>
+            </constraints>
+            <point key="canvasLocation" x="141" y="154"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="eo_top_bg" width="375" height="421"/>
+        <image name="eo_top_editone" width="81" height="22.5"/>
+        <image name="eo_top_logo" width="80" height="80"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

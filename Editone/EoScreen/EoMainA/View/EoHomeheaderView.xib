@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EoHomeheaderView" customModule="Editone" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eo_Music_file" translatesAutoresizingMaskIntoConstraints="NO" id="Lx0-6a-Zee">
+                    <rect key="frame" x="16" y="26" width="76" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="YlR-ht-n5i"/>
+                        <constraint firstAttribute="width" constant="76" id="uch-Vc-DI0"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZWd-ER-ElK">
+                    <rect key="frame" x="16" y="62" width="173" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PM3-VE-A6g">
+                            <rect key="frame" x="16" y="23.666666666666671" width="57" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="57" id="0kj-df-rem"/>
+                                <constraint firstAttribute="height" constant="17" id="4ZM-b1-nN9"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eo_updaod_icon" translatesAutoresizingMaskIntoConstraints="NO" id="laC-Mj-kL8">
+                            <rect key="frame" x="118" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="HXk-D3-r4L"/>
+                                <constraint firstAttribute="height" constant="44" id="koh-Xc-DNQ"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B93-CF-0yL">
+                            <rect key="frame" x="0.0" y="0.0" width="173" height="64"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain"/>
+                            <connections>
+                                <action selector="handleUploadSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="gMT-6e-VS1"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.17254901960784313" green="0.18431372549019609" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="laC-Mj-kL8" firstAttribute="centerY" secondItem="ZWd-ER-ElK" secondAttribute="centerY" id="C2M-iF-DR3"/>
+                        <constraint firstAttribute="height" constant="64" id="MNb-Db-SiZ"/>
+                        <constraint firstAttribute="bottom" secondItem="B93-CF-0yL" secondAttribute="bottom" id="RMe-PG-M7w"/>
+                        <constraint firstItem="PM3-VE-A6g" firstAttribute="centerY" secondItem="ZWd-ER-ElK" secondAttribute="centerY" id="Si7-vU-63r"/>
+                        <constraint firstItem="PM3-VE-A6g" firstAttribute="leading" secondItem="ZWd-ER-ElK" secondAttribute="leading" constant="16" id="cBp-lW-uVB"/>
+                        <constraint firstItem="B93-CF-0yL" firstAttribute="top" secondItem="ZWd-ER-ElK" secondAttribute="top" id="lXY-Gy-Qpm"/>
+                        <constraint firstAttribute="trailing" secondItem="laC-Mj-kL8" secondAttribute="trailing" constant="11" id="qk8-KU-Spt"/>
+                        <constraint firstAttribute="trailing" secondItem="B93-CF-0yL" secondAttribute="trailing" id="xL7-Xu-jUu"/>
+                        <constraint firstItem="B93-CF-0yL" firstAttribute="leading" secondItem="ZWd-ER-ElK" secondAttribute="leading" id="xpC-bz-buX"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="16"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nqn-BI-8I5">
+                    <rect key="frame" x="204" y="62" width="173" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zht-Xk-ik8">
+                            <rect key="frame" x="16" y="23.666666666666671" width="57" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="57" id="1ps-v4-OXN"/>
+                                <constraint firstAttribute="height" constant="17" id="bj7-Bs-Xgo"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eo_record_icon" translatesAutoresizingMaskIntoConstraints="NO" id="HsD-5R-3re">
+                            <rect key="frame" x="118" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="7FM-de-C39"/>
+                                <constraint firstAttribute="width" constant="44" id="wsM-ua-DHi"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OAe-WT-ISq">
+                            <rect key="frame" x="0.0" y="0.0" width="173" height="64"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain"/>
+                            <connections>
+                                <action selector="handleRecordSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="YVZ-gy-gTc"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.17254901959999999" green="0.1843137255" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="HsD-5R-3re" secondAttribute="trailing" constant="11" id="AA1-w1-NJt"/>
+                        <constraint firstItem="Zht-Xk-ik8" firstAttribute="centerY" secondItem="Nqn-BI-8I5" secondAttribute="centerY" id="DbB-TI-YhS"/>
+                        <constraint firstItem="OAe-WT-ISq" firstAttribute="leading" secondItem="Nqn-BI-8I5" secondAttribute="leading" id="Ep0-af-7xD"/>
+                        <constraint firstAttribute="trailing" secondItem="OAe-WT-ISq" secondAttribute="trailing" id="X7u-n4-HU3"/>
+                        <constraint firstAttribute="bottom" secondItem="OAe-WT-ISq" secondAttribute="bottom" id="ZpL-ee-uB7"/>
+                        <constraint firstItem="OAe-WT-ISq" firstAttribute="top" secondItem="Nqn-BI-8I5" secondAttribute="top" id="ddn-qz-wcS"/>
+                        <constraint firstAttribute="height" constant="64" id="drm-kZ-Ekc"/>
+                        <constraint firstItem="HsD-5R-3re" firstAttribute="centerY" secondItem="Nqn-BI-8I5" secondAttribute="centerY" id="j8X-7a-DW5"/>
+                        <constraint firstItem="Zht-Xk-ik8" firstAttribute="leading" secondItem="Nqn-BI-8I5" secondAttribute="leading" constant="16" id="zD4-Q3-3a0"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="16"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eo_Style_choose" translatesAutoresizingMaskIntoConstraints="NO" id="JXO-Xw-Lwu">
+                    <rect key="frame" x="0.0" y="146" width="120" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="7tW-Ff-am7"/>
+                        <constraint firstAttribute="height" constant="13" id="Nhm-AG-DmE"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdE-yN-DIZ">
+                    <rect key="frame" x="16" y="171" width="165" height="165"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="165" id="d39-gG-9wk"/>
+                        <constraint firstAttribute="height" constant="165" id="qoi-vI-LYc"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Button" image="eo_music_bg_0"/>
+                    <connections>
+                        <action selector="handleMusicTypeOneSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="eTE-4g-OOx"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Nb-xn-Dxv">
+                    <rect key="frame" x="212" y="171" width="165" height="165"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="165" id="228-Ks-x2G"/>
+                        <constraint firstAttribute="width" constant="165" id="BQk-8z-pFE"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Button" image="eo_music_bg_1"/>
+                    <connections>
+                        <action selector="handleMusicTypeTwoSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="RAv-5j-muO"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyy-ji-cvM">
+                    <rect key="frame" x="16" y="348" width="165" height="165"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="165" id="Nc3-b3-iOE"/>
+                        <constraint firstAttribute="height" constant="165" id="dYb-vd-hKJ"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Button" image="eo_music_bg_2"/>
+                    <connections>
+                        <action selector="handleMusicTypeThreeSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="ek0-oe-Dc6"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nmt-aq-ofn">
+                    <rect key="frame" x="212" y="348" width="165" height="165"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="165" id="41T-Ti-WWP"/>
+                        <constraint firstAttribute="height" constant="165" id="yDb-K0-ZnF"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Button" image="eo_music_bg_3"/>
+                    <connections>
+                        <action selector="handleMusicTypeFourSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="lZb-Co-xYI"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prM-TB-EtF">
+                    <rect key="frame" x="16" y="525" width="361" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="fRh-D4-fTG"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="16"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Next" backgroundImage="eo_btn_bg">
+                        <color key="titleColor" red="0.047058823530000002" green="0.058823529409999999" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="handleMusicTypeNextSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="YvN-Sg-b4y"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.047058823530000002" green="0.058823529409999999" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="prM-TB-EtF" firstAttribute="top" secondItem="xyy-ji-cvM" secondAttribute="bottom" constant="12" id="18w-6h-LXQ"/>
+                <constraint firstItem="prM-TB-EtF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="2ZF-gl-9Hv"/>
+                <constraint firstItem="tdE-yN-DIZ" firstAttribute="top" secondItem="JXO-Xw-Lwu" secondAttribute="bottom" constant="12" id="6AZ-Rn-Ay2"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Nqn-BI-8I5" secondAttribute="trailing" constant="16" id="6Ip-Py-TSq"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5Nb-xn-Dxv" secondAttribute="trailing" constant="16" id="7SE-ZG-JPn"/>
+                <constraint firstItem="ZWd-ER-ElK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="D47-l7-vW4"/>
+                <constraint firstItem="Nmt-aq-ofn" firstAttribute="top" secondItem="5Nb-xn-Dxv" secondAttribute="bottom" constant="12" id="EqY-Jl-hYm"/>
+                <constraint firstItem="Lx0-6a-Zee" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="FTC-6B-PTo"/>
+                <constraint firstItem="tdE-yN-DIZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Rgh-PT-ELE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Nmt-aq-ofn" secondAttribute="trailing" constant="16" id="V06-cp-fxn"/>
+                <constraint firstItem="xyy-ji-cvM" firstAttribute="top" secondItem="tdE-yN-DIZ" secondAttribute="bottom" constant="12" id="VD7-XY-7fc"/>
+                <constraint firstItem="ZWd-ER-ElK" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.44" id="WBr-o5-cmf"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="prM-TB-EtF" secondAttribute="trailing" constant="16" id="Z24-Aj-XIY"/>
+                <constraint firstItem="Lx0-6a-Zee" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="26" id="a9W-Gu-8bD"/>
+                <constraint firstItem="Nqn-BI-8I5" firstAttribute="top" secondItem="ZWd-ER-ElK" secondAttribute="top" id="frU-uK-H2a"/>
+                <constraint firstItem="Nqn-BI-8I5" firstAttribute="width" secondItem="ZWd-ER-ElK" secondAttribute="width" id="j26-ph-ivy"/>
+                <constraint firstItem="JXO-Xw-Lwu" firstAttribute="top" secondItem="ZWd-ER-ElK" secondAttribute="bottom" constant="20" id="nSo-aj-nqc"/>
+                <constraint firstItem="5Nb-xn-Dxv" firstAttribute="top" secondItem="tdE-yN-DIZ" secondAttribute="top" id="piY-x7-tsZ"/>
+                <constraint firstItem="xyy-ji-cvM" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="qyx-Fq-fzm"/>
+                <constraint firstItem="JXO-Xw-Lwu" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ryc-C6-ijj"/>
+                <constraint firstItem="ZWd-ER-ElK" firstAttribute="top" secondItem="Lx0-6a-Zee" secondAttribute="bottom" constant="12" id="xdS-th-2H8"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="221" y="148"/>
+        </view>
+        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="I3J-Ra-96A">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <point key="canvasLocation" x="1026" y="124"/>
+        </imageView>
+    </objects>
+    <resources>
+        <image name="eo_Music_file" width="148" height="23"/>
+        <image name="eo_Style_choose" width="204" height="29"/>
+        <image name="eo_btn_bg" width="686" height="100"/>
+        <image name="eo_music_bg_0" width="346" height="346"/>
+        <image name="eo_music_bg_1" width="346" height="346"/>
+        <image name="eo_music_bg_2" width="346" height="346"/>
+        <image name="eo_music_bg_3" width="346" height="346"/>
+        <image name="eo_record_icon" width="88" height="88"/>
+        <image name="eo_updaod_icon" width="88" height="88"/>
+    </resources>
+</document>

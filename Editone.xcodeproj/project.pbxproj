@@ -7,13 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E6CE4CA3275644E9CE836868 /* Pods_Editone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F02D93857DDE781069B3C73 /* Pods_Editone.framework */; };
+		CDC3C0C06E5F8DE862C52ADC /* Pods_Editone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8097D4B4E7978B8D248BB2D3 /* Pods_Editone.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		09C41A28348685CAE332F9EF /* Pods-Editone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Editone.release.xcconfig"; path = "Target Support Files/Pods-Editone/Pods-Editone.release.xcconfig"; sourceTree = "<group>"; };
-		1F02D93857DDE781069B3C73 /* Pods_Editone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Editone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7DEC2F11F109AC0F1E5E2A77 /* Pods-Editone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Editone.debug.xcconfig"; path = "Target Support Files/Pods-Editone/Pods-Editone.debug.xcconfig"; sourceTree = "<group>"; };
+		8097D4B4E7978B8D248BB2D3 /* Pods_Editone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Editone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C262797EDE613D40B2A1484F /* Pods-Editone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Editone.release.xcconfig"; path = "Target Support Files/Pods-Editone/Pods-Editone.release.xcconfig"; sourceTree = "<group>"; };
+		D89531D6BF819C7FCB7C4D6A /* Pods-Editone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Editone.debug.xcconfig"; path = "Target Support Files/Pods-Editone/Pods-Editone.debug.xcconfig"; sourceTree = "<group>"; };
+		F29D5CEE2F68F0E800A903FB /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5CF02F68F25200A903FB /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5CF22F68F25200A903FB /* AxcAE_TabBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AxcAE_TabBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5CF42F68F25200A903FB /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5CF62F68F25200A903FB /* HandyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HandyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5CF82F68F25200A903FB /* IQKeyboardManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = IQKeyboardManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5CFA2F68F25200A903FB /* Kingfisher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5CFC2F68F25200A903FB /* LYEmptyView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LYEmptyView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5CFE2F68F25200A903FB /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5D002F68F25200A903FB /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5D022F68F25200A903FB /* RxCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5D042F68F25200A903FB /* RxRelay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxRelay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5D062F68F25200A903FB /* RxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5D082F68F25200A903FB /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F29D5D0A2F68F25200A903FB /* Toast_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Toast_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DE7F512F67AA1F00B4F1D8 /* Editone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -43,28 +58,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E6CE4CA3275644E9CE836868 /* Pods_Editone.framework in Frameworks */,
+				CDC3C0C06E5F8DE862C52ADC /* Pods_Editone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0674DDC32F05F37F6A5A6EDA /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1F02D93857DDE781069B3C73 /* Pods_Editone.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		454682425B6581ACEFE5A766 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7DEC2F11F109AC0F1E5E2A77 /* Pods-Editone.debug.xcconfig */,
-				09C41A28348685CAE332F9EF /* Pods-Editone.release.xcconfig */,
+				D89531D6BF819C7FCB7C4D6A /* Pods-Editone.debug.xcconfig */,
+				C262797EDE613D40B2A1484F /* Pods-Editone.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		EF50DF5B5F389F1913B41EC5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F29D5CF02F68F25200A903FB /* Alamofire.framework */,
+				F29D5CF22F68F25200A903FB /* AxcAE_TabBar.framework */,
+				F29D5CF42F68F25200A903FB /* CocoaLumberjack.framework */,
+				F29D5CF62F68F25200A903FB /* HandyJSON.framework */,
+				F29D5CF82F68F25200A903FB /* IQKeyboardManager.framework */,
+				F29D5CFA2F68F25200A903FB /* Kingfisher.framework */,
+				F29D5CFC2F68F25200A903FB /* LYEmptyView.framework */,
+				F29D5CFE2F68F25200A903FB /* MBProgressHUD.framework */,
+				F29D5D002F68F25200A903FB /* MJRefresh.framework */,
+				F29D5D022F68F25200A903FB /* RxCocoa.framework */,
+				F29D5D042F68F25200A903FB /* RxRelay.framework */,
+				F29D5D062F68F25200A903FB /* RxSwift.framework */,
+				F29D5D082F68F25200A903FB /* SnapKit.framework */,
+				F29D5D0A2F68F25200A903FB /* Toast_Swift.framework */,
+				F29D5CEE2F68F0E800A903FB /* Alamofire.framework */,
+				8097D4B4E7978B8D248BB2D3 /* Pods_Editone.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F2DE7F482F67AA1F00B4F1D8 = {
@@ -73,7 +103,7 @@
 				F2DE7F532F67AA1F00B4F1D8 /* Editone */,
 				F2DE7F522F67AA1F00B4F1D8 /* Products */,
 				454682425B6581ACEFE5A766 /* Pods */,
-				0674DDC32F05F37F6A5A6EDA /* Frameworks */,
+				EF50DF5B5F389F1913B41EC5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,11 +122,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F2DE7F672F67AA2000B4F1D8 /* Build configuration list for PBXNativeTarget "Editone" */;
 			buildPhases = (
-				D856936EE5E1124C168FDF06 /* [CP] Check Pods Manifest.lock */,
+				C0334A30355485299A806FDC /* [CP] Check Pods Manifest.lock */,
 				F2DE7F4D2F67AA1F00B4F1D8 /* Sources */,
 				F2DE7F4E2F67AA1F00B4F1D8 /* Frameworks */,
 				F2DE7F4F2F67AA1F00B4F1D8 /* Resources */,
-				0ECD006BF3B7F148B602DA69 /* [CP] Embed Pods Frameworks */,
+				6D170D1C432E33CDDCF28315 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -117,7 +147,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				CLASSPREFIX = EO;
+				CLASSPREFIX = Eo;
 				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
@@ -156,7 +186,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0ECD006BF3B7F148B602DA69 /* [CP] Embed Pods Frameworks */ = {
+		6D170D1C432E33CDDCF28315 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -164,16 +194,20 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Editone/Pods-Editone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Editone/Pods-Editone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Editone/Pods-Editone-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D856936EE5E1124C168FDF06 /* [CP] Check Pods Manifest.lock */ = {
+		C0334A30355485299A806FDC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -210,20 +244,22 @@
 /* Begin XCBuildConfiguration section */
 		F2DE7F682F67AA2000B4F1D8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7DEC2F11F109AC0F1E5E2A77 /* Pods-Editone.debug.xcconfig */;
+			baseConfigurationReference = D89531D6BF819C7FCB7C4D6A /* Pods-Editone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8D98ATN359;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Editone/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EditOne;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -247,20 +283,22 @@
 		};
 		F2DE7F692F67AA2000B4F1D8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09C41A28348685CAE332F9EF /* Pods-Editone.release.xcconfig */;
+			baseConfigurationReference = C262797EDE613D40B2A1484F /* Pods-Editone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8D98ATN359;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Editone/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EditOne;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

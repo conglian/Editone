@@ -1,24 +1,30 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '14..0'
+ platform :ios, '15.0'
 
 target 'Editone' do
-  platform :ios, '15.0'
+#  platform :ios, '15.0'
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  use_modular_headers!
 
   # Pods for Editone
   pod 'RxSwift'
   pod 'RxCocoa'
-#  pod 'Alamofire'
-  pod 'SnapKit', '5.6.0'
-  pod 'Kingfisher', '~> 7.0'
-  pod 'MJRefresh', '3.7.5'
+  pod 'LYEmptyView'
+  pod 'Toast-Swift', '~> 5.0.1'
+  pod 'Alamofire'
+  pod 'SnapKit'
+  pod 'Kingfisher'
+  pod 'MJRefresh', '~> 3.7.9'
   pod 'HandyJSON'
   pod 'MBProgressHUD'
   pod 'IQKeyboardManager'
-  pod 'SwiftyStoreKit'
-  pod 'SDWebImageSVGCoder'
+  pod 'CocoaLumberjack/Swift'
   pod 'AxcAE_TabBar'
+  #  pod 'SwiftyStoreKit'
+#  pod 'SDWebImageSVGCoder'
+#  pod 'AxcAE_TabBar'
+
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|
