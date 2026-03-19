@@ -129,11 +129,21 @@
                         <constraint firstAttribute="height" constant="165" id="qoi-vI-LYc"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Button" image="eo_music_bg_0"/>
+                    <state key="normal" backgroundImage="eo_music_bg_0"/>
                     <connections>
                         <action selector="handleMusicTypeOneSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="eTE-4g-OOx"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jazz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wr9-3I-NcE">
+                    <rect key="frame" x="70" y="293" width="57" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="R8C-eF-0d8"/>
+                        <constraint firstAttribute="width" constant="57" id="dNM-WG-YhS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Nb-xn-Dxv">
                     <rect key="frame" x="212" y="171" width="165" height="165"/>
                     <constraints>
@@ -141,11 +151,21 @@
                         <constraint firstAttribute="width" constant="165" id="BQk-8z-pFE"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Button" image="eo_music_bg_1"/>
+                    <state key="normal" backgroundImage="eo_music_bg_1"/>
                     <connections>
                         <action selector="handleMusicTypeTwoSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="RAv-5j-muO"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DJ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zb-3O-BDv">
+                    <rect key="frame" x="266" y="293" width="57" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="57" id="grt-wg-t37"/>
+                        <constraint firstAttribute="height" constant="17" id="kJ9-Zt-hxz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyy-ji-cvM">
                     <rect key="frame" x="16" y="348" width="165" height="165"/>
                     <constraints>
@@ -153,11 +173,21 @@
                         <constraint firstAttribute="height" constant="165" id="dYb-vd-hKJ"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Button" image="eo_music_bg_2"/>
+                    <state key="normal" backgroundImage="eo_music_bg_2"/>
                     <connections>
                         <action selector="handleMusicTypeThreeSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="ek0-oe-Dc6"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Electronic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XL1-U4-uWt">
+                    <rect key="frame" x="59.666666666666657" y="470" width="78" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="DVK-zH-Uqz"/>
+                        <constraint firstAttribute="width" constant="78" id="x9K-aY-yRl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nmt-aq-ofn">
                     <rect key="frame" x="212" y="348" width="165" height="165"/>
                     <constraints>
@@ -165,7 +195,7 @@
                         <constraint firstAttribute="height" constant="165" id="yDb-K0-ZnF"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="Button" image="eo_music_bg_3"/>
+                    <state key="normal" backgroundImage="eo_music_bg_3"/>
                     <connections>
                         <action selector="handleMusicTypeFourSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="lZb-Co-xYI"/>
                     </connections>
@@ -184,6 +214,16 @@
                         <action selector="handleMusicTypeNextSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="YvN-Sg-b4y"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blues" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFE-1v-la7">
+                    <rect key="frame" x="266" y="470" width="57" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="ftF-um-afe"/>
+                        <constraint firstAttribute="width" constant="57" id="kQk-DT-K7t"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="12"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.047058823530000002" green="0.058823529409999999" blue="0.078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -194,14 +234,22 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Nqn-BI-8I5" secondAttribute="trailing" constant="16" id="6Ip-Py-TSq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="5Nb-xn-Dxv" secondAttribute="trailing" constant="16" id="7SE-ZG-JPn"/>
                 <constraint firstItem="ZWd-ER-ElK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="D47-l7-vW4"/>
+                <constraint firstItem="prM-TB-EtF" firstAttribute="top" secondItem="cFE-1v-la7" secondAttribute="bottom" constant="38" id="EMC-C8-67G"/>
                 <constraint firstItem="Nmt-aq-ofn" firstAttribute="top" secondItem="5Nb-xn-Dxv" secondAttribute="bottom" constant="12" id="EqY-Jl-hYm"/>
                 <constraint firstItem="Lx0-6a-Zee" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="FTC-6B-PTo"/>
+                <constraint firstItem="prM-TB-EtF" firstAttribute="top" secondItem="XL1-U4-uWt" secondAttribute="bottom" constant="38" id="FcN-6U-Jam"/>
+                <constraint firstItem="Nmt-aq-ofn" firstAttribute="top" secondItem="1zb-3O-BDv" secondAttribute="bottom" constant="38" id="Ht9-QY-1YR"/>
                 <constraint firstItem="tdE-yN-DIZ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="Rgh-PT-ELE"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Nmt-aq-ofn" secondAttribute="trailing" constant="16" id="V06-cp-fxn"/>
                 <constraint firstItem="xyy-ji-cvM" firstAttribute="top" secondItem="tdE-yN-DIZ" secondAttribute="bottom" constant="12" id="VD7-XY-7fc"/>
                 <constraint firstItem="ZWd-ER-ElK" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.44" id="WBr-o5-cmf"/>
+                <constraint firstItem="xyy-ji-cvM" firstAttribute="top" secondItem="Wr9-3I-NcE" secondAttribute="bottom" constant="38" id="XGb-x7-Exl"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="prM-TB-EtF" secondAttribute="trailing" constant="16" id="Z24-Aj-XIY"/>
+                <constraint firstItem="1zb-3O-BDv" firstAttribute="centerX" secondItem="5Nb-xn-Dxv" secondAttribute="centerX" id="ZUI-vD-ckz"/>
                 <constraint firstItem="Lx0-6a-Zee" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="26" id="a9W-Gu-8bD"/>
+                <constraint firstItem="XL1-U4-uWt" firstAttribute="centerX" secondItem="xyy-ji-cvM" secondAttribute="centerX" id="ahr-79-lR2"/>
+                <constraint firstItem="cFE-1v-la7" firstAttribute="centerX" secondItem="Nmt-aq-ofn" secondAttribute="centerX" id="b8l-8a-Zav"/>
+                <constraint firstItem="Wr9-3I-NcE" firstAttribute="centerX" secondItem="tdE-yN-DIZ" secondAttribute="centerX" id="bl5-yI-lJN"/>
                 <constraint firstItem="Nqn-BI-8I5" firstAttribute="top" secondItem="ZWd-ER-ElK" secondAttribute="top" id="frU-uK-H2a"/>
                 <constraint firstItem="Nqn-BI-8I5" firstAttribute="width" secondItem="ZWd-ER-ElK" secondAttribute="width" id="j26-ph-ivy"/>
                 <constraint firstItem="JXO-Xw-Lwu" firstAttribute="top" secondItem="ZWd-ER-ElK" secondAttribute="bottom" constant="20" id="nSo-aj-nqc"/>
@@ -211,7 +259,13 @@
                 <constraint firstItem="ZWd-ER-ElK" firstAttribute="top" secondItem="Lx0-6a-Zee" secondAttribute="bottom" constant="12" id="xdS-th-2H8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="221" y="148"/>
+            <connections>
+                <outlet property="imageView1" destination="tdE-yN-DIZ" id="ZdT-ol-Mzh"/>
+                <outlet property="imageView2" destination="5Nb-xn-Dxv" id="wsc-TL-A4g"/>
+                <outlet property="imageView3" destination="xyy-ji-cvM" id="8Ak-kE-ty1"/>
+                <outlet property="imageView4" destination="Nmt-aq-ofn" id="kIV-jf-dIL"/>
+            </connections>
+            <point key="canvasLocation" x="-147.32824427480915" y="34.507042253521128"/>
         </view>
         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="I3J-Ra-96A">
             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -220,14 +274,14 @@
         </imageView>
     </objects>
     <resources>
-        <image name="eo_Music_file" width="148" height="23"/>
-        <image name="eo_Style_choose" width="204" height="29"/>
-        <image name="eo_btn_bg" width="686" height="100"/>
-        <image name="eo_music_bg_0" width="346" height="346"/>
-        <image name="eo_music_bg_1" width="346" height="346"/>
-        <image name="eo_music_bg_2" width="346" height="346"/>
-        <image name="eo_music_bg_3" width="346" height="346"/>
-        <image name="eo_record_icon" width="88" height="88"/>
-        <image name="eo_updaod_icon" width="88" height="88"/>
+        <image name="eo_Music_file" width="74" height="11.5"/>
+        <image name="eo_Style_choose" width="102" height="14.5"/>
+        <image name="eo_btn_bg" width="343" height="50"/>
+        <image name="eo_music_bg_0" width="173" height="173"/>
+        <image name="eo_music_bg_1" width="173" height="173"/>
+        <image name="eo_music_bg_2" width="173" height="173"/>
+        <image name="eo_music_bg_3" width="173" height="173"/>
+        <image name="eo_record_icon" width="44" height="44"/>
+        <image name="eo_updaod_icon" width="44" height="44"/>
     </resources>
 </document>

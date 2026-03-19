@@ -58,12 +58,19 @@ class EoLibraryViewController: BaseViewController {
         
         tableview?.snp.makeConstraints({ make in
             make.top.equalTo(NAVIGATION_H + 11 + 28 + 8)
-            make.bottom.leading.trailing.equalTo(0)
+            make.leading.trailing.equalTo(0)
+            make.bottom.equalTo(-88)
         })
         
         let headerView = EoLibraryheaderView().loadViewFromNib()
-        headerView.frame = CGRectMake(0, 0, WSCREEN, 298 + NAVIGATION_H + STATUS_H)
+        headerView.frame = CGRectMake(0, 0, WSCREEN, 230 + NAVIGATION_H + STATUS_H)
         tableview?.tableHeaderView = headerView;
+        
+        headerView.workBlocks = { [weak self] in
+            let vc = EoPlayListVC()
+            vc.titles = "Playlist"
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
             
         
     }
@@ -72,7 +79,8 @@ class EoLibraryViewController: BaseViewController {
         return 10
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 76
     }
     
@@ -83,6 +91,9 @@ class EoLibraryViewController: BaseViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = EoPlayListVC()
+        vc.titles = "Playlist2"
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
 

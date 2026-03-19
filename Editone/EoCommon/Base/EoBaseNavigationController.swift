@@ -13,6 +13,7 @@ class EoBaseNavigationController: UINavigationController {
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        Eo_Log("push=\(viewControllers.count)"   )
         if viewControllers.count > 0 {
             viewController.hidesBottomBarWhenPushed = true
         }

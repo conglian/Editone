@@ -9,6 +9,8 @@ import UIKit
 
 class EoLibraryheaderView: UIView {
     
+    var workBlocks : (() -> Void)?
+    
     func loadViewFromNib() -> EoLibraryheaderView {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "EoLibraryheaderView", bundle: bundle)
@@ -18,6 +20,9 @@ class EoLibraryheaderView: UIView {
 
     @IBAction func handleWorkSender(_ sender: Any) {
         Eo_Log("handleWorkSender")
+        if workBlocks != nil {
+            workBlocks!()
+        }
     }
     
     @IBAction func handleAddNewSender(_ sender: Any) {

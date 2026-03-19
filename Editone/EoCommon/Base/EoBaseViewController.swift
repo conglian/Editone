@@ -79,23 +79,27 @@ class BaseViewController: UIViewController , UITableViewDelegate, UITableViewDat
         view.addSubview(navBar)
         
         // 设置自定义导航栏背景图片
-        navBar.barBackgroundImage = UIImage(named: "pf_nav_bg")
+//        navBar.barBackgroundImage = UIImage(named: "")
 
         // 设置自定义导航栏背景颜色
         // navBar.backgroundColor = MainNavBarColor
         
-        navBar.textAlignment = .left
+        navBar.textAlignment = .center
         
         // 设置自定义导航栏标题颜色
-        navBar.titleLabelColor = .clear
+        navBar.titleLabelColor = .white
 
         // 设置自定义导航栏左右按钮字体颜色
-        navBar.wr_setTintColor(color: UIColor.black)
+//        navBar.wr_setTintColor(color: UIColor.black)
         
         navBar.wr_setBottomLineHidden(hidden: true)
         
         if self.navigationController?.children.count != 1 {
-            navBar.wr_setLeftButton(image: UIImage(named: "pf_back_black")!)
+            navBar.wr_setLeftButton(image: UIImage(named: "eo_back_icon")!)
+        }
+        
+        navBar.onClickLeftButton = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -138,6 +142,11 @@ class BaseViewController: UIViewController , UITableViewDelegate, UITableViewDat
         tableview?.backgroundColor = UIColor.clear
         tableview?.tableFooterView = UIView()
         tableview?.tableHeaderView = UIView()
+        if #available(iOS 11.0, *) {
+            tableview?.contentInsetAdjustmentBehavior = .never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
         tableview?.ly_emptyView = BPEmptyView.empty(withImageStr: "", titleStr: "", detailStr: "")
         tableview?.ly_emptyView.tapEmptyViewBlock = {
             
