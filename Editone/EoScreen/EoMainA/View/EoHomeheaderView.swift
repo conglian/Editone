@@ -13,7 +13,7 @@ class EoHomeheaderView: UIView {
     
     var presentUploadBlocks : (() -> Void)?
     
-    var nextBlocks : (() -> Void)?
+    var nextBlocks : ((Int) -> Void)?
 
     @IBOutlet weak var imageView1: UIButton!
     
@@ -22,6 +22,8 @@ class EoHomeheaderView: UIView {
     @IBOutlet weak var imageView3: UIButton!
     
     @IBOutlet weak var imageView4: UIButton!
+    
+    var indexs = -1
     
     func loadViewFromNib() -> EoHomeheaderView {
         let bundle = Bundle(for: type(of: self))
@@ -75,14 +77,14 @@ class EoHomeheaderView: UIView {
     @IBAction func handleMusicTypeNextSender(_ sender: Any) {
         Eo_Log("handleMusicTypeNextSender")
         if nextBlocks != nil {
-            nextBlocks!();
+            nextBlocks!(indexs);
         }
     }
     
     
     func updateSletecd(row : Int){
         if row == 0 {
-            
+            indexs = 0
             // 设置圆角
             imageView1.layer.cornerRadius = 16
             imageView1.layer.masksToBounds = true // ⚠️ 必须，否则圆角无效
@@ -116,6 +118,7 @@ class EoHomeheaderView: UIView {
             imageView4.layer.borderColor = UIColor.clear.cgColor
             
         } else if row == 1 {
+            indexs = 1
             
             // 设置圆角
             imageView1.layer.cornerRadius = 16
@@ -150,6 +153,7 @@ class EoHomeheaderView: UIView {
             imageView4.layer.borderColor = UIColor.clear.cgColor
             
         } else if row == 2 {
+            indexs = 2
             
             // 设置圆角
             imageView1.layer.cornerRadius = 16
@@ -184,6 +188,7 @@ class EoHomeheaderView: UIView {
             imageView4.layer.borderColor = UIColor.clear.cgColor
             
         } else {
+            indexs = 3
             
             // 设置圆角
             imageView1.layer.cornerRadius = 16

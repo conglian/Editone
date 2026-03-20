@@ -22,6 +22,7 @@ target 'Editone' do
   pod 'CocoaLumberjack/Swift'
   pod 'AxcAE_TabBar'
   pod 'AudioKit'
+  pod 'FDWaveformView'
 #  pod 'SDWebImageSVGCoder'
 #  pod 'AxcAE_TabBar'
 

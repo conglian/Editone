@@ -9,7 +9,7 @@ import UIKit
 extension UIColor {
     
     static var view_background: UIColor {
-        return UIColor(named: "view_back") ?? UIColor(hexString: "#F3F5F6")
+        return UIColor(named: "view_back") ?? UIColor(hexString: "#202529")
     }
     
     static var main: UIColor {

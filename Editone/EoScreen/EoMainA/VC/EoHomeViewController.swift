@@ -8,7 +8,6 @@
 import UIKit
 import SnapKit
 import UniformTypeIdentifiers
-import JJFloatingActionButton
 
 class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
     
@@ -243,8 +242,11 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
             self?.present(vc, animated: true)
         }
         
-        headerView.nextBlocks = { [weak self] in
+        headerView.nextBlocks = { [weak self] indexs in
             let vc = EoEditRecordVC()
+            if indexs != -1 {
+                vc.bg_name = "eo_music_bg_" + "\(indexs)"
+            }
             self?.navigationController?.pushViewController(vc, animated: true)
         }
         
