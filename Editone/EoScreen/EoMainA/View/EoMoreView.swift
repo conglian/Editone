@@ -18,6 +18,10 @@ class EoMoreView: UIView {
         return view
     }
     
+    var deleteBlock : (() ->Void)?
+    
+    var addtoLitsBlock : (() ->Void)?
+    
     
     override func awakeFromNib() {
         
@@ -36,10 +40,16 @@ class EoMoreView: UIView {
     }
     
     @IBAction func handleDeleteSender(_ sender: Any) {
+        if deleteBlock != nil {
+            deleteBlock!()
+        }
+        EoPopupManager.shared.dismissPopupView()
     }
     
     @IBAction func handleAddSender(_ sender: Any) {
         EoPopupManager.shared.dismissPopupView()
-        EoPopupManager.shared.showPopupView(EoAddToPlaylistView().loadViewFromNib(), direction: .bottom)
+        if addtoLitsBlock != nil {
+            addtoLitsBlock!()
+        }
     }
 }

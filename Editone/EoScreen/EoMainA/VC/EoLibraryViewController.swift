@@ -12,6 +12,8 @@ class EoLibraryViewController: BaseViewController {
     
     let cellID = "EoLibraryViewCell"
     
+    var libs = [URL]()
+    
     // fileprivate UI variable
     fileprivate lazy var topimageV : UIImageView = {
         let v = UIImageView()
@@ -30,7 +32,7 @@ class EoLibraryViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        libs = LibraryPlayListFileManager.shared.allSubdirectoriesSortedByCreationDateDesc()
         configUI()
 
     }
@@ -63,20 +65,33 @@ class EoLibraryViewController: BaseViewController {
         })
         
         let headerView = EoLibraryheaderView().loadViewFromNib()
-        headerView.frame = CGRectMake(0, 0, WSCREEN, 230 + NAVIGATION_H + STATUS_H)
+        headerView.frame = CGRectMake(0, 0, WSCREEN, 310 + NAVIGATION_H + STATUS_H)
         tableview?.tableHeaderView = headerView;
         
         headerView.workBlocks = { [weak self] in
             let vc = EoPlayListVC()
             vc.titles = "Playlist"
+            vc.updateData(is_work: true, libs: [URL]())
             self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        // 创建新的歌单
+        headerView.addNewBlocks = { [weak self] in
+            let view = EoEditNameView().loadViewFromNib()
+            view.nameTF.placeholder = "Playlist Name"
+            view.saveBlock = {[weak self] name in
+                LibraryPlayListFileManager.shared.createSubdirectory(name: name)
+                self?.libs = LibraryPlayListFileManager.shared.allSubdirectoriesSortedByCreationDateDesc()
+                self?.tableview?.reloadData()
+            }
+            EoPopupManager.shared.showPopupView(view, direction: .center)
+            
         }
             
         
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return libs.count
     }
     
     
@@ -87,12 +102,19 @@ class EoLibraryViewController: BaseViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : EoLibraryViewCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)  as! EoLibraryViewCell
         cell.selectionStyle = .none
+        cell.lib_tilte_label.text = libs[indexPath.row].deletingPathExtension().lastPathComponent
+        cell.btnsBlock = { [weak self] in
+            LibraryPlayListFileManager.shared.deleteSubdirectory(name: self?.libs[indexPath.row].deletingPathExtension().lastPathComponent ?? "")
+            self?.libs = LibraryPlayListFileManager.shared.allSubdirectoriesSortedByCreationDateDesc()
+            self?.tableview?.reloadData()
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = EoPlayListVC()
-        vc.titles = "Playlist2"
+        vc.titles = libs[indexPath.row].deletingPathExtension().lastPathComponent
+        vc.updateData(is_work: false, libs: LibraryPlayListFileManager.shared.allFiles(inSubdirectory: libs[indexPath.row].deletingPathExtension().lastPathComponent))
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

@@ -11,6 +11,8 @@ class EoLibraryheaderView: UIView {
     
     var workBlocks : (() -> Void)?
     
+    var addNewBlocks : (() -> Void)?
+    
     func loadViewFromNib() -> EoLibraryheaderView {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: "EoLibraryheaderView", bundle: bundle)
@@ -27,5 +29,8 @@ class EoLibraryheaderView: UIView {
     
     @IBAction func handleAddNewSender(_ sender: Any) {
         Eo_Log("handleAddNewSender")
+        if addNewBlocks != nil {
+            addNewBlocks!()
+        }
     }
 }

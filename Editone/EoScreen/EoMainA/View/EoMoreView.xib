@@ -166,7 +166,7 @@
             <connections>
                 <outlet property="bottomView" destination="46V-rT-Ree" id="IV7-5z-uNp"/>
             </connections>
-            <point key="canvasLocation" x="139.69465648854961" y="121.83098591549296"/>
+            <point key="canvasLocation" x="-411" y="101"/>
         </view>
     </objects>
     <resources>

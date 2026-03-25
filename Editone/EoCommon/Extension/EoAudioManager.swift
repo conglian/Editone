@@ -6,7 +6,6 @@
 //
 
 import UIKit
-internal import AVFAudio
 import AVFoundation
 
 class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
@@ -27,10 +26,12 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
     var timeBlocks : (() -> Void)?
     
+    var saveEndBlocks : ((URL) -> Void)?
+    
     override init() {
         super.init()
         recordingSession = AVAudioSession.sharedInstance()
-        try? recordingSession.setCategory(.playAndRecord, mode: .default)
+        try? recordingSession.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .allowBluetooth])
         try? recordingSession.setActive(true)
     }
     
@@ -42,15 +43,15 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         // 如果文件存在，先删除
         if FileManager.default.fileExists(atPath: fileName.path) {
             try? FileManager.default.removeItem(at: fileName)
-            // 同时删除之前保存的录音信息
             deleteRecordingInfo(fileName: fileNames)
         }
         
         let settings: [String: Any] = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000,
+            AVSampleRateKey: 44100, // 提高采样率，提升音量与音质
             AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue,
+            AVEncoderBitRateKey: 192000 // 提高比特率
         ]
         
         do {
@@ -79,11 +80,14 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         print("录音结束，总时长: \(formatTime(currentRecordTime))")
     }
     
-    //保存录音
+    // 保存录音
     func saveRecording() {
         if let url = audioRecorder?.url {
             print("录音文件保存到: \(url)")
             saveRecordingInfo(url: url, duration: currentRecordTime)
+            if saveEndBlocks != nil {
+                saveEndBlocks!(url)
+            }
         }
     }
     
@@ -98,6 +102,7 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer?.delegate = self
+            audioPlayer?.volume = 1.0 // 保证播放音量最大
             audioPlayer?.play()
             
             currentPlayTime = 0
@@ -123,7 +128,6 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     private func saveRecordingInfo(url: URL, duration: TimeInterval) {
         var recordings = UserDefaults.standard.array(forKey: "recordings") as? [[String: Any]] ?? []
         
-        // 删除同名记录
         let fileName = url.deletingPathExtension().lastPathComponent
         recordings.removeAll { dict in
             if let path = dict["filePath"] as? String {
@@ -163,11 +167,6 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     }
     
     // MARK: - 掐头去尾裁剪保存新文件
-    /// sourceFileName: 已保存的源文件名（不带后缀）
-    /// targetFileName: 新生成的文件名（不带后缀）
-    /// headTrim: 从开始掐掉的秒数
-    /// tailTrim: 从结尾掐掉的秒数
-    /// completion: 返回生成的新文件URL
     func trimRecording(sourceFileName: String, targetFileName: String, headTrim: TimeInterval, tailTrim: TimeInterval, completion: @escaping (URL?) -> Void) {
         
         let sourceURL = getDocumentsDirectory().appendingPathComponent("\(sourceFileName).m4a")
@@ -182,7 +181,6 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         let asset = AVAsset(url: sourceURL)
         let totalDuration = CMTimeGetSeconds(asset.duration)
         
-        // 计算裁剪区间
         let startTime = max(0, headTrim)
         let endTime = min(totalDuration, totalDuration - tailTrim)
         
@@ -196,7 +194,6 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         let end = CMTime(seconds: endTime, preferredTimescale: 600)
         let timeRange = CMTimeRangeFromTimeToTime(start: start, end: end)
         
-        // 删除已存在目标文件
         if FileManager.default.fileExists(atPath: targetURL.path) {
             try? FileManager.default.removeItem(at: targetURL)
             deleteRecordingInfo(fileName: targetFileName)
@@ -245,5 +242,176 @@ class AudioManager: NSObject, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
         let min = Int(time) / 60
         let sec = Int(time) % 60
         return String(format: "0:%02d:%02d", min, sec)
+    }
+}
+
+
+class LibraryFileManager {
+    
+    static let shared = LibraryFileManager()
+    
+    private let subdirectoryName = "music_list"
+    
+    private init() {
+        createSubdirectoryIfNeeded()
+    }
+    
+    public func subdirectoryURL() -> URL {
+        let libraryURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).first!
+        return libraryURL.appendingPathComponent(subdirectoryName)
+    }
+    
+    private func createSubdirectoryIfNeeded() {
+        let url = subdirectoryURL()
+        if !FileManager.default.fileExists(atPath: url.path) {
+            do {
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print("创建自定义子目录失败: \(error)")
+            }
+        }
+    }
+    
+    func fileCount() -> Int {
+        return allFileURLs().count
+    }
+    
+    /// 获取自定义子目录下所有文件 URL（按添加时间倒序）
+    func allFileURLs() -> [URL] {
+        do {
+            let files = try FileManager.default.contentsOfDirectory(at: subdirectoryURL(),
+                                                                    includingPropertiesForKeys: [.creationDateKey],
+                                                                    options: [.skipsHiddenFiles])
+            // 按创建时间倒序
+            let sortedFiles = files.sorted { file1, file2 in
+                let date1 = (try? file1.resourceValues(forKeys: [.creationDateKey]).creationDate) ?? Date.distantPast
+                let date2 = (try? file2.resourceValues(forKeys: [.creationDateKey]).creationDate) ?? Date.distantPast
+                return date1 > date2
+            }
+            return sortedFiles
+        } catch {
+            print("获取文件列表失败: \(error)")
+            return []
+        }
+    }
+    
+    @discardableResult
+    func deleteFile(nameWithoutExtension: String) -> Bool {
+        let fileManager = FileManager.default
+        let directory = subdirectoryURL()
+        
+        do {
+            let files = try fileManager.contentsOfDirectory(at: directory, includingPropertiesForKeys: [.creationDateKey], options: [.skipsHiddenFiles])
+            if let fileToDelete = files.first(where: { $0.deletingPathExtension().lastPathComponent == nameWithoutExtension }) {
+                try fileManager.removeItem(at: fileToDelete)
+                print("删除成功: \(fileToDelete.lastPathComponent)")
+                return true
+            } else {
+                print("文件不存在: \(nameWithoutExtension)")
+                return false
+            }
+            
+        } catch {
+            print("删除文件失败: \(error)")
+            return false
+        }
+    }
+    
+    @discardableResult
+    func saveFile(data: Data, name: String) -> Bool {
+        let fileURL = subdirectoryURL().appendingPathComponent(name)
+        do {
+            try data.write(to: fileURL)
+            // 保存完成后自动更新文件的创建日期到现在（确保倒序正确）
+            try FileManager.default.setAttributes([.creationDate: Date()], ofItemAtPath: fileURL.path)
+            return true
+        } catch {
+            print("保存文件失败: \(error)")
+            return false
+        }
+    }
+    
+    func fileURL(name: String) -> URL {
+        let files = allFileURLs()
+        if let matchedFile = files.first(where: { $0.deletingPathExtension().lastPathComponent == name }) {
+            return matchedFile
+        }
+        return subdirectoryURL().appendingPathComponent(name)
+    }
+}
+
+class LocalImageManager {
+    
+    static let shared = LocalImageManager()
+    
+    private let subdirectoryName = "music_image"
+    
+    private init() {
+        createSubdirectoryIfNeeded()
+    }
+    
+    private func imagesDirectory() -> URL {
+        let libraryURL = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
+        return libraryURL.appendingPathComponent(subdirectoryName)
+    }
+    
+    private func createSubdirectoryIfNeeded() {
+        let url = imagesDirectory()
+        if !FileManager.default.fileExists(atPath: url.path) {
+            do {
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print("创建子目录失败: \(error)")
+            }
+        }
+    }
+    
+    @discardableResult
+    func saveImage(_ image: UIImage, name: String) -> Bool {
+        let fileName = name.hasSuffix(".png") ? name : "\(name).png"
+        let fileURL = imagesDirectory().appendingPathComponent(fileName)
+        
+        guard let data = image.pngData() else { return false }
+        
+        do {
+            try data.write(to: fileURL)
+            return true
+        } catch {
+            print("保存图片失败: \(error)")
+            return false
+        }
+    }
+    
+    func getImage(name: String) -> UIImage? {
+        let fileName = name.hasSuffix(".png") ? name : "\(name).png"
+        let fileURL = imagesDirectory().appendingPathComponent(fileName)
+        return UIImage(contentsOfFile: fileURL.path)
+    }
+    
+    @discardableResult
+    func deleteImage(name: String) -> Bool {
+        let fileName = name.hasSuffix(".png") ? name : "\(name).png"
+        let fileURL = imagesDirectory().appendingPathComponent(fileName)
+        guard FileManager.default.fileExists(atPath: fileURL.path) else { return false }
+        
+        do {
+            try FileManager.default.removeItem(at: fileURL)
+            return true
+        } catch {
+            print("删除图片失败: \(error)")
+            return false
+        }
+    }
+    
+    func allImageURLs() -> [URL] {
+        do {
+            let files = try FileManager.default.contentsOfDirectory(at: imagesDirectory(),
+                                                                    includingPropertiesForKeys: nil,
+                                                                    options: [.skipsHiddenFiles])
+            return files
+        } catch {
+            print("获取图片列表失败: \(error)")
+            return []
+        }
     }
 }

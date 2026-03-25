@@ -13,15 +13,9 @@ class UserDefault {
         set { UserDefaults.standard.set(newValue, forKey: "NN_isLogin_key") }
     }
     
-    public class var device_id: String {
-        get { UserDefaults.standard.string(forKey: "PF_device_id_key") ?? "" }
-        set { UserDefaults.standard.set(newValue, forKey: "PF_device_id_key") }
-    }
-    
-    // 下载保存
-    public class var user_install: Bool {
-        get { UserDefaults.standard.bool(forKey: "PF_install_key") }
-        set { UserDefaults.standard.set(newValue, forKey: "PF_install_key") }
+    public class var record_index: Int {
+        get { UserDefaults.standard.integer(forKey: "record_index") }
+        set { UserDefaults.standard.set(newValue, forKey: "record_index") }
     }
     
     // 是否今天打开过

@@ -51,50 +51,21 @@ extension UIViewController {
         // 显示 ActionSheet
         present(alertController, animated: true, completion: nil)
     }
-
     
-    static var current: UIViewController? {
-        var rootVC: UIViewController?
-        
-        if #available(iOS 13.0, *) {
-            rootVC = UIApplication.shared.connectedScenes
-                .compactMap { $0 as? UIWindowScene }
-                .flatMap { $0.windows }
-                .first(where: { $0.isKeyWindow })?
-                .rootViewController
-        } else {
-            rootVC = UIApplication.shared.keyWindow?.rootViewController
-        }
-        
-        var current = rootVC
-        // 处理被 present 的 VC
-        while let presented = current?.presentedViewController {
-            current = presented
-        }
-        // 处理 TabBarController
-        if let tabbar = current as? UITabBarController,
-           let selected = tabbar.selectedViewController {
-            current = selected
-        }
-        // 处理 NavigationController
-        while let nav = current as? UINavigationController,
-              let top = nav.topViewController {
-            current = top
-        }
-        
-        return current
-    }
-    
-    func showLoading(onScreen: Bool = true) {
+    func showLoading(onScreen: Bool = false) {
         if onScreen {
             let parentView = (UIApplication.shared.currentKeyWindow ?? UIView()) as UIView
-            MBProgressHUD.showAdded(to: parentView, animated: true)
+            let hud = MBProgressHUD.showAdded(to: parentView, animated: true)
+            hud.mode = .indeterminate
+            hud.isUserInteractionEnabled = false // ⚡️允许下层点击
         } else {
-            MBProgressHUD.showAdded(to: self.view, animated: true)
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.mode = .indeterminate
+            hud.isUserInteractionEnabled = false // ⚡️允许下层点击
         }
     }
     
-    func hiddeLoading(onScreen: Bool = true) {
+    func hiddeLoading(onScreen: Bool = false) {
         if onScreen {
             let parentView = (UIApplication.shared.currentKeyWindow ?? UIView()) as UIView
             MBProgressHUD.hide(for: parentView, animated: true)
@@ -103,4 +74,49 @@ extension UIViewController {
         }
     }
 
+}
+
+extension UIApplication {
+    
+    /// 获取当前最顶层可见的 UIViewController
+    static var topViewController: UIViewController? {
+        // 获取 keyWindow（iOS 13+ 需要遍历 scenes）
+        let windows = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .filter { $0.isHidden == false && $0.windowLevel == .normal }
+
+        guard let rootVC = windows.first?.rootViewController else { return nil }
+
+        return getTopViewController(from: rootVC)
+    }
+
+    private static func getTopViewController(from vc: UIViewController) -> UIViewController {
+        // 1️⃣ modal 展示优先
+        if let presented = vc.presentedViewController {
+            return getTopViewController(from: presented)
+        }
+        
+        // 2️⃣ UINavigationController
+        if let nav = vc as? UINavigationController, let top = nav.topViewController {
+            return getTopViewController(from: top)
+        }
+        
+        // 3️⃣ UITabBarController
+        if let tab = vc as? UITabBarController, let selected = tab.selectedViewController {
+            return getTopViewController(from: selected)
+        }
+        
+        // 4️⃣ 自定义 TabBarController
+        if let customTab = vc as? EoCustomTabBarController {
+            // 获取当前选中的 UINavigationController
+            if customTab.viewControllersList.indices.contains(customTab.selectedIndex) {
+                let currentNav = customTab.viewControllersList[customTab.selectedIndex]
+                return getTopViewController(from: currentNav)
+            }
+        }
+        
+        // 5️⃣ 普通 UIViewController
+        return vc
+    }
 }

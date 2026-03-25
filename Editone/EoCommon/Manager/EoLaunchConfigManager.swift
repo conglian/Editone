@@ -18,7 +18,7 @@ class EoLaunchConfigManager {
             
             group.enter()
             let task2 = DispatchWorkItem {
-//                PF_CloakManager.default.cloakUpload { type in
+//                EO_CloakManager.default.cloakUpload { type in
 //                    group.leave()
 //                }
             }

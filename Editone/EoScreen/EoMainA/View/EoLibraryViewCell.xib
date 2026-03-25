@@ -28,7 +28,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Work" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jT6-cA-Ahp">
-                                <rect key="frame" x="16" y="23.666666666666671" width="210" height="17"/>
+                                <rect key="frame" x="16" y="23.666666666666671" width="218" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="NP7-W3-hcv"/>
                                 </constraints>
@@ -56,7 +56,7 @@
                             <constraint firstAttribute="trailing" secondItem="561-i5-twz" secondAttribute="trailing" constant="12" id="IeA-cv-Rxi"/>
                             <constraint firstAttribute="trailing" secondItem="DKm-bl-icK" secondAttribute="trailing" id="OFB-kn-xyg"/>
                             <constraint firstItem="561-i5-twz" firstAttribute="centerY" secondItem="gLV-hX-bKC" secondAttribute="centerY" id="SRQ-8O-Adq"/>
-                            <constraint firstItem="561-i5-twz" firstAttribute="leading" secondItem="jT6-cA-Ahp" secondAttribute="trailing" constant="16" id="kUi-Gu-q1l"/>
+                            <constraint firstItem="561-i5-twz" firstAttribute="leading" secondItem="jT6-cA-Ahp" secondAttribute="trailing" constant="8" id="kUi-Gu-q1l"/>
                             <constraint firstAttribute="height" constant="64" id="vas-F3-fAu"/>
                             <constraint firstItem="jT6-cA-Ahp" firstAttribute="centerY" secondItem="gLV-hX-bKC" secondAttribute="centerY" id="vc8-7P-7JV"/>
                         </constraints>

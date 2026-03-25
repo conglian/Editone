@@ -38,8 +38,8 @@ class EoCustomTabBarController: UIViewController {
     private let normalImages = ["eo_home_n","eo_Library_n","eo_set_n"]
     private let selectedImages = ["eo_home_s","eo_Library_s","eo_set_s"]
 
-    private var viewControllersList: [UINavigationController] = []
-    private var selectedIndex: Int = 0
+    var viewControllersList: [UINavigationController] = []
+    var selectedIndex: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()

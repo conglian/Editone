@@ -24,6 +24,12 @@ class EoAddToPlaylistView: UIView , UITableViewDelegate, UITableViewDataSource {
     
     var seletecd_index = 0
     
+    var libs = [URL]()
+    
+    var music_name = ""
+    
+    var music_url = URL(fileURLWithPath: "")
+    
     @IBOutlet weak var tableViewbg: UIView!
     
     
@@ -36,6 +42,8 @@ class EoAddToPlaylistView: UIView , UITableViewDelegate, UITableViewDataSource {
 
         // 指定只对顶部左右生效
         self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        libs = LibraryPlayListFileManager.shared.allSubdirectoriesSortedByCreationDateDesc()
         
         getTableView()
         
@@ -68,11 +76,20 @@ class EoAddToPlaylistView: UIView , UITableViewDelegate, UITableViewDataSource {
     }
     
     @IBAction func handleAddSender(_ sender: Any) {
+        if LibraryPlayListFileManager.shared.allSubdirectoriesSortedByCreationDateDesc().count <= 0 {
+            self.showToast(text: "There are no playlists yet. Go create a playlist and then add some!")
+            return
+        }
+        if LibraryPlayListFileManager.shared.subdirectory(libs[seletecd_index].deletingPathExtension().lastPathComponent, containsFile: music_name) == true {
+           return
+        }
         EoPopupManager.shared.dismissPopupView()
+        LibraryPlayListFileManager.shared.saveFile(toSubdirectory: libs[seletecd_index].deletingPathExtension().lastPathComponent, fileName: music_name, sourceURL: music_url)
+        self.showToast(text: "Successfully Added")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return libs.count
     }
     
     
@@ -88,13 +105,23 @@ class EoAddToPlaylistView: UIView , UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.iconimage.image = UIImage(named: "")
         }
+        cell.lib_tilte_label.text = libs[indexPath.row].deletingPathExtension().lastPathComponent
         cell.contentView.backgroundColor = UIColor.init(hexString: "#2F353E")
         cell.centerView.backgroundColor = UIColor.init(hexString: "#202429")
+        if LibraryPlayListFileManager.shared.subdirectory(libs[indexPath.row].deletingPathExtension().lastPathComponent, containsFile: music_name) == false {
+            cell.lib_tilte_label.textColor = UIColor.init(hexString: "#FFFFFF", alpha: 0.8)
+        } else {
+            cell.lib_tilte_label.textColor = UIColor.init(hexString: "#FFFFFF", alpha: 0.2)
+        }
         cell.btnsBlock = {}
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 歌单包含 直接返回
+        if LibraryPlayListFileManager.shared.subdirectory(libs[indexPath.row].deletingPathExtension().lastPathComponent, containsFile: music_name) == true {
+           return
+        }
         seletecd_index = indexPath.row
         self.tableview?.reloadData()
     }

@@ -7,8 +7,9 @@
 
 import UIKit
 import SnapKit
+import MessageUI
 
-class EoSettingViewController: BaseViewController {
+class EoSettingViewController: BaseViewController,MFMailComposeViewControllerDelegate {
     
     let cellID = "EoSettingViewCell"
     
@@ -79,7 +80,6 @@ class EoSettingViewController: BaseViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell : EoSettingViewCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)  as! EoSettingViewCell
-        Eo_Log("1111")
         cell.selectionStyle = .none
         cell.titleLabel.text = datas[indexPath.row]
         cell.imageV.image = UIImage(named: images[indexPath.row])
@@ -87,7 +87,60 @@ class EoSettingViewController: BaseViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if indexPath.row == 0 {
+            let vc = BaseWebViewController.init(url: URL(string: EO_APP_PRIVACY_URL_PATH)!)
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 1 {
+            let vc = BaseWebViewController.init(url: URL(string: EO_APP_TERM_URL_PATH)!)
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let recipientEmail = EO_SUPPORT_EMAIL_ADDRESS
+            let subject = ""
+            let body = " "
+
+            // Show default mail composer
+            if MFMailComposeViewController.canSendMail() {
+                let mail = MFMailComposeViewController()
+                mail.mailComposeDelegate = self
+                mail.setToRecipients([recipientEmail])
+                mail.setSubject(subject)
+                mail.setMessageBody(body, isHTML: false)
+
+                present(mail, animated: true)
+
+            // Show third party email composer if default Mail app is not present
+            } else if let emailUrl = createEmailUrl(to: recipientEmail, subject: subject, body: body) {
+                UIApplication.shared.open(emailUrl)
+            }
+            
+        }
+    }
+    
+    private func createEmailUrl(to: String, subject: String, body: String) -> URL? {
+        let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let bodyEncoded = body.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+
+        let gmailUrl = URL(string: "googlegmail://co?to=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let outlookUrl = URL(string: "ms-outlook://compose?to=\(to)&subject=\(subjectEncoded)")
+        let yahooMail = URL(string: "ymail://mail/compose?to=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let sparkUrl = URL(string: "readdle-spark://compose?recipient=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let defaultUrl = URL(string: "mailto:\(to)?subject=\(subjectEncoded)&body=\(bodyEncoded)")
+
+        if let gmailUrl = gmailUrl, UIApplication.shared.canOpenURL(gmailUrl) {
+            return gmailUrl
+        } else if let outlookUrl = outlookUrl, UIApplication.shared.canOpenURL(outlookUrl) {
+            return outlookUrl
+        } else if let yahooMail = yahooMail, UIApplication.shared.canOpenURL(yahooMail) {
+            return yahooMail
+        } else if let sparkUrl = sparkUrl, UIApplication.shared.canOpenURL(sparkUrl) {
+            return sparkUrl
+        }
+
+        return defaultUrl
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
 
 }

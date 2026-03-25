@@ -125,8 +125,8 @@ class BaseViewController: UIViewController , UITableViewDelegate, UITableViewDat
     }
     
     func popViewController() {
-        UIViewController.current?.navigationController?.popViewController(animated: true)
-        UIViewController.current?.dismiss(animated: true)
+        UIApplication.topViewController?.navigationController?.popViewController(animated: true)
+        UIApplication.topViewController?.dismiss(animated: true)
     }
     
     /// 个人资料修改
@@ -252,5 +252,12 @@ extension UIViewController {
         } else {
             self.view.makeToast(text, duration: 2.0, position: .center)
         }
+    }
+}
+extension UIView {
+    
+    /// Toast
+    func showToast(text: String, onScreen: Bool = true) {
+        UIApplication.shared.currentKeyWindow?.makeToast(text, duration: 2.0, position: .center)
     }
 }

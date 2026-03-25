@@ -8,9 +8,13 @@ import SnapKit
 import FDWaveformView
 import AVFoundation
 
-class EoEditRecordVC: BaseViewController {
+class EoEditRecordVC: BaseViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var bg_name  = ""
+    
+    var music_path : URL?
+    
+    var is_save = false
 
     // MARK: - Waveform & Range
     let waveformView = FDWaveformView()
@@ -25,6 +29,8 @@ class EoEditRecordVC: BaseViewController {
     var displayLink: CADisplayLink?
     
     var proViewLeadingConstraint: Constraint?
+    
+    var coverimage : UIImage?
 
     // MARK: - UI Elements
     fileprivate lazy var topimageV: UIImageView = {
@@ -42,6 +48,7 @@ class EoEditRecordVC: BaseViewController {
         v.layer.borderWidth = 1
         v.layer.borderColor = UIColor(hexString: "#FFFFFF", alpha: 0.05).cgColor
         v.setBackgroundImage(UIImage(named: bg_name), for: .normal)
+        v.addTarget(self, action: #selector(handleAddSender), for: .touchUpInside)
         v.imageView?.contentMode = .scaleToFill
         return v
     }()
@@ -140,6 +147,19 @@ class EoEditRecordVC: BaseViewController {
         displayLink?.invalidate()
         displayLink = nil
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if EoMusicVC.shared.audioPlayer?.isPlaying == true {
+            EoMusicVC.shared.handlePlaySender()
+            NotificationCenter.default.post(name: EO_NOTIFICATION_MUSIC_FINISHED, object: nil)
+        }
+
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
 
     // MARK: - Waveform Setup
     private func setupWaveform() {
@@ -175,6 +195,17 @@ class EoEditRecordVC: BaseViewController {
         tuoimageV.addSubview(rightPanArea)
         let rightPan = UIPanGestureRecognizer(target: self, action: #selector(handleRightPan(_:)))
         rightPanArea.addGestureRecognizer(rightPan)
+    }
+    
+    @objc func handleAddSender(){
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
+        
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.delegate = self
+        picker.allowsEditing = false
+        present(picker, animated: true)
+        
     }
 
     // MARK: - 左右拖拽处理
@@ -308,7 +339,7 @@ class EoEditRecordVC: BaseViewController {
     // MARK: - Load Audio
     private func loadAudio() {
         DispatchQueue.global().async {
-            guard let url = Bundle.main.url(forResource: "alphabet", withExtension: "mp3") else { return }
+            guard let url = self.music_path else { return }
             self.audioURL = url
 
             do {
@@ -348,7 +379,7 @@ class EoEditRecordVC: BaseViewController {
     }
 
     // MARK: - Play Action
-    @objc private func handlePlaySender() {
+    @objc func handlePlaySender() {
         guard let player = audioPlayer else { return }
 
         if !player.isPlaying {
@@ -394,19 +425,33 @@ class EoEditRecordVC: BaseViewController {
 
     // MARK: - Edit Button
     @objc func handleEditSender() {
-        print("Edit pressed")
+        let view = EoEditNameView().loadViewFromNib()
+        view.saveBlock = { [weak self] name in
+            self?.music_name_Label.text = name
+        }
+        EoPopupManager.shared.showPopupView(view, direction: .center)
     }
     
     // MARK: - Save Button
     @objc func handleSaveSender() {
+        
+        if music_name_Label.text == "Music Name" || music_name_Label.text == "" {
+            self.showToast(text: "Please set the music name.")
+            return
+        }
         guard let audioURL = audioURL else { return }
         
         let asset = AVAsset(url: audioURL)
         
         // 创建输出文件路径
-        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let outputURL = documents.appendingPathComponent("trimmedAudio.m4a")
-        
+        let myFilesURL = LibraryFileManager.shared.subdirectoryURL()
+        let outputURL = myFilesURL.appendingPathComponent("\(music_name_Label.text ?? "").\(music_path?.pathExtension ?? "")")
+        // 如果目录不存在，创建
+            if !FileManager.default.fileExists(atPath: myFilesURL.path) {
+                try? FileManager.default.createDirectory(at: myFilesURL,
+                                                         withIntermediateDirectories: true,
+                                                         attributes: nil)
+            }
         // 如果文件已存在，先删除
         if FileManager.default.fileExists(atPath: outputURL.path) {
             try? FileManager.default.removeItem(at: outputURL)
@@ -417,9 +462,17 @@ class EoEditRecordVC: BaseViewController {
             print("创建 AVAssetExportSession 失败")
             return
         }
-        
         exportSession.outputURL = outputURL
-        exportSession.outputFileType = .m4a
+        exportSession.outputFileType = fileType(for: music_path!)
+        
+        // 保存图片
+        let backgroundImage = add_bg_btn.backgroundImage(for: .normal)
+        if coverimage != nil {
+            LocalImageManager.shared.saveImage(coverimage!, name: music_name_Label.text ?? "")
+        } else {
+            LocalImageManager.shared.saveImage(backgroundImage!, name: music_name_Label.text ?? "")
+        }
+
         
         // 设置截取时间范围
         let start = CMTime(seconds: startTime, preferredTimescale: 1000)
@@ -432,6 +485,8 @@ class EoEditRecordVC: BaseViewController {
                 switch exportSession.status {
                 case .completed:
                     print("导出成功: \(outputURL.path)")
+                    self.is_save = true
+                    self.showToast(text: "Your work has been saved in 'library-mywork'")
                 case .failed:
                     print("导出失败: \(exportSession.error?.localizedDescription ?? "")")
                 case .cancelled:
@@ -442,11 +497,39 @@ class EoEditRecordVC: BaseViewController {
             }
         }
     }
+    
+    func fileType(for url: URL) -> AVFileType? {
+        let asset = AVURLAsset(url: url)
+        
+        // 获取文件扩展名
+        let fileExtension = url.pathExtension.lowercased()
+        
+        switch fileExtension {
+        case "mov": return .mov
+        case "mp4": return .mp4
+        case "m4a": return .m4a
+        case "wav": return .wav
+        case "mp3": return .mp3
+        case "caf": return .caf
+        default: return nil
+        }
+    }
 
     // MARK: - UI Setup
     private func configUI() {
         navBar.barBackgroundColor = .bgroundColors
         navBar.title = "Record"
+        navBar.onClickLeftButton = { [weak self] in
+            if self?.is_save == false {
+                let view = EoConfirmExitView().loadViewFromNib()
+                view.exitBlcok = { [weak self] in
+                    self?.navigationController?.popViewController(animated: true)
+                }
+                EoPopupManager.shared.showPopupView(view, direction: .center)
+            } else {
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
 
         view.addSubview(topimageV)
         topimageV.snp.makeConstraints { make in
@@ -497,6 +580,25 @@ class EoEditRecordVC: BaseViewController {
             make.height.equalTo(60)
         }
     }
+    
+    
+    // UIImagePickerControllerDelegate
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        if let image = info[.originalImage] as? UIImage {
+            // 在这里使用选中的图片
+            print("选择了一张图片: \(image)")
+            coverimage = image
+            add_bg_btn.setImage(image, for: .normal)
+            addimageV.isHidden = true
+            add_Label.isHidden = true
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
 }
 
 // MARK: - FDWaveformViewDelegate
@@ -509,3 +611,4 @@ extension EoEditRecordVC: FDWaveformViewDelegate {
         print("Waveform did load")
     }
 }
+

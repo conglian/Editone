@@ -38,11 +38,11 @@ let EO_APP_USER_TOKEN = "\(EO_APP_BUNDLE_ID).user.token"
 /// appstore 链接
 let EO_APPSTORE_URL_LINK = "itms-apps://itunes.apple.com/app/id\(EO_APPSTORE_ID)?mt=8"
 /// 隐私协议
-let EO_APP_PRIVACY_URL_PATH = "https://pulsefit.org/privacy/"
+let EO_APP_PRIVACY_URL_PATH = "https://editone.online/privacy.html"
 /// 用户条款
-let EO_APP_TERM_URL_PATH = "https://pulsefit.org/terms/"
+let EO_APP_TERM_URL_PATH = "https://editone.online/terms.html"
 /// 意见反馈邮箱地址
-let EO_SUPPORT_EMAIL_ADDRESS = "support@pulsefit.org"
+let EO_SUPPORT_EMAIL_ADDRESS = "support@editone.online"
 /// 启动页等待时长,毫秒
 let EO_LAUNCH_WATIE_TIME_OUT: Float = 3.0
 /// 加解密钥匙

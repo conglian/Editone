@@ -11,6 +11,7 @@ import UniformTypeIdentifiers
 
 class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
     
+    var file_path : URL?
     
     // fileprivate UI variable
     fileprivate lazy var topimageV : UIImageView = {
@@ -39,6 +40,7 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
     // fileprivate UI variable
     fileprivate lazy var muisc_s_btn: UIButton = {
         let v = UIButton()
+        v.isSelected = true
         v.addTarget(self, action: #selector(handleMusicPlaySender), for: .touchUpInside)
         v.setBackgroundImage(UIImage(named: "eo_play_s_icon"), for: .normal)
         v.setBackgroundImage(UIImage(named: "eo_pasue_s_icon"), for: .selected)
@@ -52,14 +54,14 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
         v.font = UIFont.systemFont(ofSize: 12)
         v.textAlignment = .center
         v.numberOfLines = 0
-        v.text = "Bass Synth"
+        v.text = LibraryFileManager.shared.allFileURLs().first?.deletingPathExtension().lastPathComponent
         return v
     }()
     
     // fileprivate UI variable
     fileprivate lazy var pop_view : UIView = {
         let v = UIView()
-        v.isHidden = false
+        v.isHidden = true
         v.backgroundColor = UIColor.clear  // 背景透明
         v.layer.cornerRadius = 15          // 圆角 15
         v.layer.borderWidth = 1            // 边线宽度 1
@@ -91,6 +93,7 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
     // fileprivate UI variable
     fileprivate lazy var music_btn: UIButton = {
         let v = UIButton()
+        v.isHidden = true
         v.backgroundColor = UIColor(hexString: "#1F2023")
         v.addTarget(self, action: #selector(handleMusicSender), for: .touchUpInside)
         
@@ -108,17 +111,50 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
         return v
     }()
     
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         configUI()
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showmucis), name: EO_NOTIFICATION_MUSIC_FINISHED, object: nil)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissmusic), name: EO_NOTIFICATION_dismiss_FINISHED, object: nil)
+        
+        initmusic_block()
+    }
+    
+    func initmusic_block(){
+        
+                
+        let vc = EoMusicVC.shared
+        
+        vc.view.backgroundColor = .bgroundColors
+        
+        vc.musicBlock = { [weak self] success, message in
+            if success {
+                self?.muisc_s_btn.isSelected = true
+            } else {
+                self?.muisc_s_btn.isSelected = false
+            }
+            self?.music_Label.text = message
+        }
+    }
+    
+    @objc func showmucis(){
+        music_btn.isHidden = true
+    }
+    
+    @objc func dismissmusic(){
+        music_btn.isHidden = false
     }
     
     func setupMusicButton() {
         
-        self.view.addSubview(music_btn)
+        UIApplication.shared.currentKeyWindow?.addSubview(music_btn)
         music_btn.snp.makeConstraints { make in
             make.trailing.equalTo(0)
             make.bottom.equalTo(-(88 + 6))
@@ -174,28 +210,19 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
     
     @objc func handleMusicCloseSender(){
         pop_view.isHidden = true
+        file_path = URL(fileURLWithPath: "")
     }
     
     @objc func handleMusicPlaySender(){
         
-        let vc = EoMusicVC.shared
-        vc.view.backgroundColor = .bgroundColors
-        vc.musicBlock = { [weak self] success, message in
-            if success {
-                self?.muisc_s_btn.isSelected = true
-            } else {
-                self?.muisc_s_btn.isSelected = false
-            }
-            self?.music_Label.text = message
-        }
-        
-        vc.handlePlaySender()
+        EoMusicVC.shared.handlePlaySender()
     
     }
     
     @objc func handleMusicSender(){
         
         let vc = EoMusicVC.shared
+        music_btn.isHidden = true
         vc.musicBlock = { [weak self] success, message in
             if success {
                 self?.muisc_s_btn.isSelected = true
@@ -204,8 +231,13 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
             }
             self?.music_Label.text = message
         }
-        self.navigationController?.pushViewController(vc, animated: true)
-        
+      
+        if let topVC = UIApplication.topViewController {
+            print("当前顶层 VC: \(topVC)")
+            
+            topVC.navigationController?.pushViewController(vc, animated: true)
+        }
+                
     }
     
     private func configUI () {
@@ -238,16 +270,28 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
             
         headerView.presentBlocks = { [weak self] in
             let vc = EoRecordVC()
+            vc.saveBlock = { [weak self] file_name in
+                Eo_Log("file_name=\(file_name)")
+                self?.file_path = file_name
+                self?.pop_view.isHidden = false
+                self?.music_name_Label.text = file_name.deletingPathExtension().lastPathComponent
+            }
             vc.modalPresentationStyle = .fullScreen
             self?.present(vc, animated: true)
         }
         
         headerView.nextBlocks = { [weak self] indexs in
-            let vc = EoEditRecordVC()
-            if indexs != -1 {
-                vc.bg_name = "eo_music_bg_" + "\(indexs)"
+            
+            if  self?.pop_view.isHidden == true {
+                self?.showToast(text: "Please add the music first")
+            } else {
+                let vc = EoEditRecordVC()
+                vc.music_path = self?.file_path
+                if indexs != -1 {
+                    vc.bg_name = "eo_music_bg_" + "\(indexs)"
+                }
+                self?.navigationController?.pushViewController(vc, animated: true)
             }
-            self?.navigationController?.pushViewController(vc, animated: true)
         }
         
         headerView.presentUploadBlocks = { [weak self] in
@@ -292,6 +336,9 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
             
             // 复制文件到 App 沙盒
             try fileManager.copyItem(at: pickedURL, to: destinationURL)
+            file_path = destinationURL
+            pop_view.isHidden = false
+            music_name_Label.text = destinationURL.deletingPathExtension().lastPathComponent
             print("文件已保存到本地: \(destinationURL.path)")
             
         } catch {

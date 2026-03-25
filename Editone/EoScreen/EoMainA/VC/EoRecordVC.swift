@@ -7,8 +7,15 @@
 
 import UIKit
 import SnapKit
+import AVFAudio
 
 class EoRecordVC: BaseViewController {
+    
+    var saveBlock : ((URL) ->Void)?
+    
+    var file_path : URL?
+    
+    var record_end = false
 
     // fileprivate UI variable
     fileprivate lazy var topimageV : UIImageView = {
@@ -95,17 +102,50 @@ class EoRecordVC: BaseViewController {
 
     }
     
-    @objc func handleStartSender(){
+    @objc func handleStartSender() {
+        // 检查麦克风权限
+        let status = AVAudioSession.sharedInstance().recordPermission
+        
+        switch status {
+        case .granted:
+            // 权限已授权，可以录音
+            startRecording()
+        case .denied:
+            // 权限被拒绝
+            self.showToast(text: "Please allow microphone access in Settings.")
+        case .undetermined:
+            // 未确定权限，弹出请求
+            AVAudioSession.sharedInstance().requestRecordPermission { [weak self] granted in
+                DispatchQueue.main.async {
+                    if granted {
+                        self?.startRecording()
+                    } else {
+                        self?.showToast(text: "Microphone access was denied.")
+                    }
+                }
+            }
+        @unknown default:
+            self.showToast(text: "Microphone access error.")
+        }
+    }
+    
+    private func startRecording() {
         print("开始录音")
-        AudioManager.share.startRecording(fileNames: "name1111")
-        start_btn.isHidden = true;
-        tips_Label.isHidden = true;
-        stop_btn.isHidden = false;
-        proimage.isHidden = false;
+        if UserDefault.record_index <= 0 {
+            UserDefault.record_index = 1
+        }
+        AudioManager.share.startRecording(fileNames: "record_\(UserDefault.record_index)")
+        start_btn.isHidden = true
+        tips_Label.isHidden = true
+        stop_btn.isHidden = false
+        proimage.isHidden = false
     }
     
     @objc func handleStopSender(){
         print("停止录音")
+        record_end = true
+        UserDefault.record_index += 1
+        navBar.wr_setRightButton(image: UIImage(named: "eo_save_s")!)
         AudioManager.share.stopRecording()
         start_btn.isHidden = false;
         tips_Label.isHidden = false;
@@ -119,12 +159,32 @@ class EoRecordVC: BaseViewController {
         navBar.barBackgroundColor = .bgroundColors
         
         navBar.title = "Record"
-                
+        
+        navBar.wr_setRightButton(image: UIImage(named: "eo_save_btn")!)
         
         navBar.wr_setLeftButton(image: UIImage(named: "eo_close_btn")!)
         
         navBar.onClickLeftButton = { [weak self] in
             self?.dismiss(animated: true)
+        }
+        
+        navBar.onClickRightButton = { [weak self] in
+            if self?.record_end == false {
+                self?.showToast(text: "Please record the music first.")
+            } else {
+                AudioManager.share.saveEndBlocks = { [weak self] file_name in
+                    self?.file_path = file_name
+                    Eo_Log("self?.file_path=\(file_name)")
+                    if self?.saveBlock != nil {
+                        self?.saveBlock!(file_name)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            // 这里的代码将在主线程执行
+                            self?.dismiss(animated: true)
+                        }
+                    }
+                }
+                AudioManager.share.saveRecording()
+            }
         }
         
         self.view.addSubview(topimageV)

@@ -35,7 +35,7 @@ extension EoLaunchLoadingManger {
         fetLuaunchConfig()
         /// 键盘设置
         setIQKeyboardManger()
-
+        
     }
     
     func setIQKeyboardManger(){
@@ -93,7 +93,7 @@ extension EoLaunchLoadingManger {
     @objc func startupBackGround() {
         Eo_Log("[loading] 进入后台")
         self.isInBackground_date = Date()
-        UIViewController.current?.dismiss(animated: true)
+        UIApplication.topViewController?.dismiss(animated: true)
         isInBackground = true
     }
 }

@@ -46,7 +46,7 @@
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain"/>
                             <connections>
-                                <action selector="handleWorkSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="fNh-o7-JIU"/>
+                                <action selector="handleWorkSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="mzQ-L6-Vpu"/>
                             </connections>
                         </button>
                     </subviews>
@@ -102,7 +102,7 @@
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain"/>
                             <connections>
-                                <action selector="handleAddNewSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="NVy-ee-rtU"/>
+                                <action selector="handleAddNewSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="LqA-tB-3vy"/>
                             </connections>
                         </button>
                     </subviews>
@@ -138,7 +138,7 @@
                 <constraint firstItem="YHw-xU-RmY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="23" id="wg7-Mr-KgC"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="139.69465648854961" y="136.61971830985917"/>
+            <point key="canvasLocation" x="68" y="-8"/>
         </view>
     </objects>
     <resources>

@@ -65,7 +65,7 @@ class BaseWebViewController: BaseViewController {
             if self.webView.canGoBack {
                 self.webView.goBack()
             } else {
-                self.popViewController()
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -94,7 +94,7 @@ extension BaseWebViewController {
         
         private lazy var backBackButton: UIButton = {
             let v = UIButton(type: .custom)
-            v.setImage(UIImage(named: "pf_back_black"), for: .normal)
+            v.setImage(UIImage(named: "eo_back_icon"), for: .normal)
             v.adjustsImageWhenHighlighted = false
             return v
         }()
@@ -103,7 +103,7 @@ extension BaseWebViewController {
             let v = UILabel()
             v.font = UIFont.systemFont(ofSize: 22, weight: .bold)
             v.text = EO_APP_NAME
-            v.textColor = UIColor.black
+            v.textColor = UIColor.white
             return v
         }()
 
@@ -121,7 +121,7 @@ extension BaseWebViewController {
         
         private func configUI() {
             
-            self.backgroundColor = UIColor.white
+            self.backgroundColor = .bgroundColors
             
             self.addSubViews([backBackButton, appNameLogo])
             backBackButton.snp.makeConstraints { make in
