@@ -17,7 +17,7 @@ target 'Editone' do
   pod 'Kingfisher'
   pod 'MJRefresh', '~> 3.7.9'
   pod 'HandyJSON'
-  pod 'MBProgressHUD'
+  pod 'SVProgressHUD'
   pod 'IQKeyboardManager'
   pod 'CocoaLumberjack/Swift'
   pod 'AxcAE_TabBar'

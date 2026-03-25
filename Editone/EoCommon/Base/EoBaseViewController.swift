@@ -6,7 +6,6 @@ import UIKit
 import RxCocoa
 import RxSwift
 import LYEmptyView
-import MBProgressHUD
 import Toast_Swift
 
 class BaseViewController: UIViewController , UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

@@ -45,6 +45,11 @@ class BaseWebViewController: BaseViewController {
         bindEvent()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        hiddeLoading()
+    }
+    
     private func configUI() {
         self.view.addSubview(navBarView)
         navBarView.snp.makeConstraints { make in

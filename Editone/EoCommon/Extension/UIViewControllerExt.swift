@@ -4,7 +4,7 @@
 //
 
 import UIKit
-import MBProgressHUD
+import SVProgressHUD
 import Toast_Swift
 
 extension UIViewController {
@@ -54,24 +54,14 @@ extension UIViewController {
     
     func showLoading(onScreen: Bool = false) {
         if onScreen {
-            let parentView = (UIApplication.shared.currentKeyWindow ?? UIView()) as UIView
-            let hud = MBProgressHUD.showAdded(to: parentView, animated: true)
-            hud.mode = .indeterminate
-            hud.isUserInteractionEnabled = false // ⚡️允许下层点击
+            SVProgressHUD.show()
         } else {
-            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
-            hud.mode = .indeterminate
-            hud.isUserInteractionEnabled = false // ⚡️允许下层点击
+            SVProgressHUD.show()
         }
     }
     
     func hiddeLoading(onScreen: Bool = false) {
-        if onScreen {
-            let parentView = (UIApplication.shared.currentKeyWindow ?? UIView()) as UIView
-            MBProgressHUD.hide(for: parentView, animated: true)
-        } else {
-            MBProgressHUD.hide(for: self.view, animated: true)
-        }
+        SVProgressHUD.dismiss()
     }
 
 }
