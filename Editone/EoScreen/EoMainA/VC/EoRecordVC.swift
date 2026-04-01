@@ -202,14 +202,14 @@ class EoRecordVC: BaseViewController {
         
         self.view.addSubview(tips_Label)
         tips_Label.snp.makeConstraints { make in
-            make.bottom.equalTo(-75)
+            make.bottom.equalTo(-45)
             make.leading.trailing.equalTo(0)
             make.height.equalTo(18)
         }
         
         self.view.addSubview(start_btn)
         start_btn.snp.makeConstraints { make in
-            make.bottom.equalTo(-123)
+            make.bottom.equalTo(-93)
             make.leading.equalTo(30)
             make.trailing.equalTo(-30)
             make.height.equalTo(50)
@@ -217,7 +217,7 @@ class EoRecordVC: BaseViewController {
         
         self.view.addSubview(proimage)
         proimage.snp.makeConstraints { make in
-            make.bottom.equalTo(-216)
+            make.bottom.equalTo(-186)
             make.leading.equalTo(11)
             make.trailing.equalTo(-11)
             make.height.equalTo(21)
@@ -225,14 +225,14 @@ class EoRecordVC: BaseViewController {
         
         self.view.addSubview(time_Label)
         time_Label.snp.makeConstraints { make in
-            make.bottom.equalTo(-220)
+            make.bottom.equalTo(-190)
             make.leading.trailing.equalTo(0)
             make.height.equalTo(13)
         }
         
         self.view.addSubview(stop_btn)
         stop_btn.snp.makeConstraints { make in
-            make.bottom.equalTo(-89)
+            make.bottom.equalTo(-59)
             make.leading.equalTo((WSCREEN-106) * 0.5)
             make.height.width.equalTo(106)
         }

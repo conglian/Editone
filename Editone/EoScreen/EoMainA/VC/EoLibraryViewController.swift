@@ -65,7 +65,7 @@ class EoLibraryViewController: BaseViewController {
         })
         
         let headerView = EoLibraryheaderView().loadViewFromNib()
-        headerView.frame = CGRectMake(0, 0, WSCREEN, 310 + NAVIGATION_H + STATUS_H)
+        headerView.frame = CGRectMake(0, 0, WSCREEN, 330 + NAVIGATION_H + STATUS_H)
         tableview?.tableHeaderView = headerView;
         
         headerView.workBlocks = { [weak self] in

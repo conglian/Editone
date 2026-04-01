@@ -265,7 +265,7 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
         })
         
         let headerView = EoHomeheaderView().loadViewFromNib()
-        headerView.frame = CGRectMake(0, 0, WSCREEN, 660 + NAVIGATION_H + STATUS_H)
+        headerView.frame = CGRectMake(0, 0, WSCREEN, 710 + NAVIGATION_H + STATUS_H)
         tableview?.tableHeaderView = headerView;
             
         headerView.presentBlocks = { [weak self] in

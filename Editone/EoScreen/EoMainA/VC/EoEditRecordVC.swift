@@ -308,14 +308,14 @@ class EoEditRecordVC: BaseViewController , UIImagePickerControllerDelegate, UINa
 
         view.addSubview(play_btn)
         play_btn.snp.makeConstraints { make in
-            make.top.equalTo(eidtbgimageV.snp.bottom).offset(40)
+            make.bottom.equalTo(-100)
             make.leading.equalTo(25)
             make.trailing.equalTo(-25)
             make.height.equalTo(50)
         }
         view.addSubview(save_btn)
         save_btn.snp.makeConstraints { make in
-            make.top.equalTo(play_btn.snp.bottom).offset(22)
+            make.bottom.equalTo(-30)
             make.leading.equalTo(25)
             make.trailing.equalTo(-25)
             make.height.equalTo(50)
@@ -560,14 +560,14 @@ class EoEditRecordVC: BaseViewController , UIImagePickerControllerDelegate, UINa
 
         view.addSubview(music_name_Label)
         music_name_Label.snp.makeConstraints { make in
-            make.top.equalTo(add_bg_btn.snp.bottom).offset(71)
+            make.bottom.equalTo(-280)
             make.centerX.equalTo(view.snp.centerX).offset(-10)
             make.height.equalTo(24)
         }
 
         view.addSubview(edit_btn)
         edit_btn.snp.makeConstraints { make in
-            make.top.equalTo(add_bg_btn.snp.bottom).offset(64)
+            make.bottom.equalTo(-273)
             make.leading.equalTo(music_name_Label.snp.trailing).offset(12)
             make.height.width.equalTo(38)
         }

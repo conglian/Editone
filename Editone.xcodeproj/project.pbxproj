@@ -106,6 +106,7 @@
 				EF50DF5B5F389F1913B41EC5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
+			tabWidth = 1;
 		};
 		F2DE7F522F67AA1F00B4F1D8 /* Products */ = {
 			isa = PBXGroup;
@@ -249,19 +250,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 8D98ATN359;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Editone/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Editone;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs to access the microphone to record audio.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to the photo album to select photos.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow recording to create your own audio tracks.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Allow access to upload a cover image for your music.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "To provide a personalized experience, please allow us to monitor your app usage. Your data will only be used for improving our services and providing relevant content.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -290,19 +292,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 8D98ATN359;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Editone/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Editone;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The app needs to access the microphone to record audio.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app requires access to the photo album to select photos.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allow recording to create your own audio tracks.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Allow access to upload a cover image for your music.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "To provide a personalized experience, please allow us to monitor your app usage. Your data will only be used for improving our services and providing relevant content.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
