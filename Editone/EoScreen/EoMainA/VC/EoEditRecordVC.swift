@@ -439,63 +439,67 @@ class EoEditRecordVC: BaseViewController , UIImagePickerControllerDelegate, UINa
             self.showToast(text: "Please set the music name.")
             return
         }
-        guard let audioURL = audioURL else { return }
-        
-        let asset = AVAsset(url: audioURL)
-        
-        // 创建输出文件路径
-        let myFilesURL = LibraryFileManager.shared.subdirectoryURL()
-        let outputURL = myFilesURL.appendingPathComponent("\(music_name_Label.text ?? "").\(music_path?.pathExtension ?? "")")
-        // 如果目录不存在，创建
-            if !FileManager.default.fileExists(atPath: myFilesURL.path) {
-                try? FileManager.default.createDirectory(at: myFilesURL,
-                                                         withIntermediateDirectories: true,
-                                                         attributes: nil)
+        GADInterstitialAdManager.share.adDidCloseHandler = { [weak self] in
+            guard let audioURL = self?.audioURL else { return }
+            
+            let asset = AVAsset(url: audioURL)
+            
+            // 创建输出文件路径
+            let myFilesURL = LibraryFileManager.shared.subdirectoryURL()
+            let outputURL = myFilesURL.appendingPathComponent("\(self?.music_name_Label.text ?? "").\(self?.music_path?.pathExtension ?? "")")
+            // 如果目录不存在，创建
+                if !FileManager.default.fileExists(atPath: myFilesURL.path) {
+                    try? FileManager.default.createDirectory(at: myFilesURL,
+                                                             withIntermediateDirectories: true,
+                                                             attributes: nil)
+                }
+            // 如果文件已存在，先删除
+            if FileManager.default.fileExists(atPath: outputURL.path) {
+                try? FileManager.default.removeItem(at: outputURL)
             }
-        // 如果文件已存在，先删除
-        if FileManager.default.fileExists(atPath: outputURL.path) {
-            try? FileManager.default.removeItem(at: outputURL)
-        }
-        
-        // 创建导出会话
-        guard let exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A) else {
-            print("创建 AVAssetExportSession 失败")
-            return
-        }
-        exportSession.outputURL = outputURL
-        exportSession.outputFileType = fileType(for: music_path!)
-        
-        // 保存图片
-        let backgroundImage = add_bg_btn.backgroundImage(for: .normal)
-        if coverimage != nil {
-            LocalImageManager.shared.saveImage(coverimage!, name: music_name_Label.text ?? "")
-        } else {
-            LocalImageManager.shared.saveImage(backgroundImage!, name: music_name_Label.text ?? "")
-        }
+            
+            // 创建导出会话
+            guard let exportSession = AVAssetExportSession(asset: asset, presetName: AVAssetExportPresetAppleM4A) else {
+                print("创建 AVAssetExportSession 失败")
+                return
+            }
+            exportSession.outputURL = outputURL
+            exportSession.outputFileType = self?.fileType(for: self?.music_path ?? URL(fileURLWithPath: ""))
+            
+            // 保存图片
+            let backgroundImage = self?.add_bg_btn.backgroundImage(for: .normal)
+            if self?.coverimage != nil {
+                LocalImageManager.shared.saveImage((self?.coverimage ?? UIImage(named: ""))!, name: self?.music_name_Label.text ?? "")
+            } else {
+                LocalImageManager.shared.saveImage(backgroundImage!, name: self?.music_name_Label.text ?? "")
+            }
 
-        
-        // 设置截取时间范围
-        let start = CMTime(seconds: startTime, preferredTimescale: 1000)
-        let duration = CMTime(seconds: endTime - startTime, preferredTimescale: 1000)
-        exportSession.timeRange = CMTimeRange(start: start, duration: duration)
-        
-        // 导出
-        exportSession.exportAsynchronously {
-            DispatchQueue.main.async {
-                switch exportSession.status {
-                case .completed:
-                    print("导出成功: \(outputURL.path)")
-                    self.is_save = true
-                    self.showToast(text: "Your work has been saved in 'library-mywork'")
-                case .failed:
-                    print("导出失败: \(exportSession.error?.localizedDescription ?? "")")
-                case .cancelled:
-                    print("导出取消")
-                default:
-                    break
+            
+            // 设置截取时间范围
+            let start = CMTime(seconds: self?.startTime ?? 0, preferredTimescale: 1000)
+            let duration = CMTime(seconds: (self?.endTime ?? 0) - (self?.startTime ?? 0), preferredTimescale: 1000)
+            exportSession.timeRange = CMTimeRange(start: start, duration: duration)
+            
+            // 导出
+            exportSession.exportAsynchronously {
+                DispatchQueue.main.async {
+                    switch exportSession.status {
+                    case .completed:
+                        print("导出成功: \(outputURL.path)")
+                        self?.is_save = true
+                        self?.showToast(text: "Your work has been saved in 'library-mywork'")
+                    case .failed:
+                        print("导出失败: \(exportSession.error?.localizedDescription ?? "")")
+                    case .cancelled:
+                        print("导出取消")
+                    default:
+                        break
+                    }
                 }
             }
         }
+        GADInterstitialAdManager.share.showAdIfAvailable(from: self)
+    
     }
     
     func fileType(for url: URL) -> AVFileType? {
@@ -520,15 +524,19 @@ class EoEditRecordVC: BaseViewController , UIImagePickerControllerDelegate, UINa
         navBar.barBackgroundColor = .bgroundColors
         navBar.title = "Record"
         navBar.onClickLeftButton = { [weak self] in
-            if self?.is_save == false {
-                let view = EoConfirmExitView().loadViewFromNib()
-                view.exitBlcok = { [weak self] in
+            GADInterstitialAdManager.share.adDidCloseHandler = { [weak self] in
+                if self?.is_save == false {
+                    let view = EoConfirmExitView().loadViewFromNib()
+                    view.exitBlcok = { [weak self] in
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                    EoPopupManager.shared.showPopupView(view, direction: .center)
+                } else {
                     self?.navigationController?.popViewController(animated: true)
                 }
-                EoPopupManager.shared.showPopupView(view, direction: .center)
-            } else {
-                self?.navigationController?.popViewController(animated: true)
             }
+            GADInterstitialAdManager.share.showAdIfAvailable(from: self ?? UIViewController())
+             
         }
 
         view.addSubview(topimageV)

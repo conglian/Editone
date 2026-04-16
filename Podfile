@@ -23,6 +23,12 @@ target 'Editone' do
   pod 'AxcAE_TabBar'
   pod 'AudioKit'
   pod 'FDWaveformView'
+  pod 'Google-Mobile-Ads-SDK'
+  pod 'Adjust'
+  pod 'WCDB.swift', '1.1.0'
+  pod 'FacebookCore', '~> 0.9.0'
+  pod 'GoogleUserMessagingPlatform'
+
 #  pod 'SDWebImageSVGCoder'
 #  pod 'AxcAE_TabBar'
 

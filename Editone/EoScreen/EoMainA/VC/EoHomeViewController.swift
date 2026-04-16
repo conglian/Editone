@@ -8,6 +8,10 @@
 import UIKit
 import SnapKit
 import UniformTypeIdentifiers
+import UserMessagingPlatform
+import AppTrackingTransparency
+import AdSupport
+import FirebaseAnalytics // 如果你使用 Firebase，可以导入
 
 class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
     
@@ -115,7 +119,10 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        Analytics.logEvent("test_event", parameters: [
+            "debug": "true"
+        ])
+                
         configUI()
         
         
@@ -125,6 +132,106 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(dismissmusic), name: EO_NOTIFICATION_dismiss_FINISHED, object: nil)
         
         initmusic_block()
+        
+        requestUMPConsent()
+    }
+    
+    func requestUMPConsent() {
+        // 1️⃣ 重置 Consent 信息
+//        ConsentInformation.shared.reset()
+        
+        // 2️⃣ 创建请求参数
+        let params = RequestParameters()
+        params.isTaggedForUnderAgeOfConsent = false
+        
+        // 2.1 强制调试设置（必填，否则 georaphy 无效）
+        let debugSettings = DebugSettings()
+        debugSettings.geography = .EEA            // 强制 EEA（用于调试）
+        if let idfv = UIDevice.current.identifierForVendor?.uuidString {
+            debugSettings.testDeviceIdentifiers = [idfv]
+        }
+        params.debugSettings = debugSettings
+        
+        // 3️⃣ 请求更新 Consent 信息
+        ConsentInformation.shared.requestConsentInfoUpdate(with: params) { error in
+            if let error = error {
+                print("❌ UMP error: \(error)")
+                return
+            }
+            if ConsentInformation.shared.consentStatus == .required {
+                
+                // 4️⃣ 加载并在可用时展示 Consent Form（兼容 UMP API）
+                ConsentForm.load { form, loadError in
+                    if let loadError = loadError {
+                        print("❌ consent form 加载失败: \(loadError)")
+                    } else if let form = form {
+                        form.present(from: self) { dismissError in
+                            if let dismissError = dismissError {
+                                print("❌ consent form 展示失败: \(dismissError)")
+                            }
+                            // 5️⃣ 打印结果
+                            let status = ConsentInformation.shared.consentStatus
+                            switch status {
+                            case .required:
+                                print("📌 需要同意")
+                            case .notRequired:
+                                print("📌 不需要同意")
+                            case .obtained:
+                                print("👍 已同意")
+                            default:
+                                print("❓ 未知状态")
+                            }
+                        }
+                    }
+                    
+                }
+                
+            } else {
+                // 没有可展示的表单，也打印状态
+                let status = ConsentInformation.shared.consentStatus
+                switch status {
+                case .required:
+                    print("📌 需要同意（无可展示表单）")
+                case .notRequired:
+                    print("📌 不需要同意（无可展示表单）")
+                case .obtained:
+                    print("👍 已同意（无可展示表单）")
+                default:
+                    print("❓ 未知状态（无可展示表单）")
+                }
+            }
+                    
+        }
+    }
+    
+    // ATT
+    func requestPermission() {
+        if #available(iOS 14, *) {
+           // 4.GCD 主线程/子线程
+           DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+              ATTrackingManager.requestTrackingAuthorization { status in
+                  switch status {
+                  case .authorized:
+                      // Tracking authorization dialog was shown
+                      // and we are authorized
+                      print("Authorized")
+                      // Now that we are authorized we can get the IDFA
+                      print(ASIdentifierManager.shared().advertisingIdentifier)
+                  case .denied:
+                      // Tracking authorization dialog was
+                      // shown and permission is denied
+                      print("Denied")
+                  case .notDetermined:
+                      // Tracking authorization dialog has not been shown
+                      print("Not Determined")
+                  case .restricted:
+                      print("Restricted")
+                  @unknown default:
+                      print("Unknown")
+                  }
+              }
+           }
+        }
     }
     
     func initmusic_block(){
@@ -281,16 +388,22 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
         }
         
         headerView.nextBlocks = { [weak self] indexs in
+//            let numbers = [0]
+//            let _ = numbers[1]
             
             if  self?.pop_view.isHidden == true {
                 self?.showToast(text: "Please add the music first")
             } else {
-                let vc = EoEditRecordVC()
-                vc.music_path = self?.file_path
-                if indexs != -1 {
-                    vc.bg_name = "eo_music_bg_" + "\(indexs)"
+                GADInterstitialAdManager.share.adDidCloseHandler = { [weak self] in
+                    
+                    let vc = EoEditRecordVC()
+                    vc.music_path = self?.file_path
+                    if indexs != -1 {
+                        vc.bg_name = "eo_music_bg_" + "\(indexs)"
+                    }
+                    self?.navigationController?.pushViewController(vc, animated: true)
                 }
-                self?.navigationController?.pushViewController(vc, animated: true)
+                GADInterstitialAdManager.share.showAdIfAvailable(from: self ?? UIViewController())
             }
         }
         
@@ -347,5 +460,4 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
     }
 
 }
-
 

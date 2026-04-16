@@ -31,6 +31,13 @@ class EoLaunchLoadingManger {
 extension EoLaunchLoadingManger {
     
     func startRun() {
+        
+        EoLaunchConfigManager.share.fetchConfig(timeOut: TimeInterval(EO_LAUNCH_WATIE_TIME_OUT)) {
+            
+        } timeOutHandler: {
+            
+        }
+
         // 初始化
         fetLuaunchConfig()
         /// 键盘设置
@@ -62,13 +69,7 @@ extension EoLaunchLoadingManger {
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         let login = EoLaunchProgressVC()
         appDelegate?.window?.rootViewController = EoBaseNavigationController(rootViewController: login)
-//        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-//        let window = UIWindow(frame: UIScreen.main.bounds)
-//        window.backgroundColor = UIColor.white
-//        let loading = EoLaunchProgressVC()
-//        appDelegate?.window = window
-//        window.rootViewController = loading
-//        window.makeKeyAndVisible()
+        appDelegate?.window?.makeKeyAndVisible()
     
     }
 }
@@ -77,23 +78,9 @@ extension EoLaunchLoadingManger {
     
     @objc func startupForeGround() {
         Eo_Log("[loading] 热启动进入前台")
-        isInBackground = false
-        if UserDefault.getisVip() == false {
-        
-            // 超出3s在展示
-            if Date().timeIntervalSince(isInBackground_date ?? Date()) > 3  {
-                // 判断缓存是否可用
-                
-                } else  {
-                   
-                }
-            }
     }
     
     @objc func startupBackGround() {
         Eo_Log("[loading] 进入后台")
-        self.isInBackground_date = Date()
-        UIApplication.topViewController?.dismiss(animated: true)
-        isInBackground = true
     }
 }

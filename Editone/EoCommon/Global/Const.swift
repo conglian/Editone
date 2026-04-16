@@ -44,7 +44,7 @@ let EO_APP_TERM_URL_PATH = "https://editone.online/terms.html"
 /// 意见反馈邮箱地址
 let EO_SUPPORT_EMAIL_ADDRESS = "support@editone.online"
 /// 启动页等待时长,毫秒
-let EO_LAUNCH_WATIE_TIME_OUT: Float = 3.0
+let EO_LAUNCH_WATIE_TIME_OUT: Float = 10.0
 /// 加解密钥匙
 let EO_APP_Crypto_Key = "\(EO_APP_BUNDLE_ID).endecrypt.private.key"
 /// APPSTORE ID

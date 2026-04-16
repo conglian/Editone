@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		CDC3C0C06E5F8DE862C52ADC /* Pods_Editone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8097D4B4E7978B8D248BB2D3 /* Pods_Editone.framework */; };
+		F20D54232F90BCE700AAC98E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F20D54222F90BCE700AAC98E /* FirebaseAnalytics */; };
+		F20D54252F90BCE700AAC98E /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = F20D54242F90BCE700AAC98E /* FirebaseAnalyticsCore */; };
+		F20D54272F90BCE700AAC98E /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = F20D54262F90BCE700AAC98E /* FirebaseCore */; };
+		F20D54292F90BCE700AAC98E /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = F20D54282F90BCE700AAC98E /* FirebaseCrashlytics */; };
+		F20D542B2F90BCE700AAC98E /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = F20D542A2F90BCE700AAC98E /* FirebaseDatabase */; };
+		F20D542D2F90BCE700AAC98E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F20D542C2F90BCE700AAC98E /* FirebaseFirestore */; };
+		F20D542F2F90BCE700AAC98E /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = F20D542E2F90BCE700AAC98E /* FirebaseRemoteConfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +65,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F20D542B2F90BCE700AAC98E /* FirebaseDatabase in Frameworks */,
+				F20D54232F90BCE700AAC98E /* FirebaseAnalytics in Frameworks */,
+				F20D54252F90BCE700AAC98E /* FirebaseAnalyticsCore in Frameworks */,
+				F20D54292F90BCE700AAC98E /* FirebaseCrashlytics in Frameworks */,
+				F20D54272F90BCE700AAC98E /* FirebaseCore in Frameworks */,
 				CDC3C0C06E5F8DE862C52ADC /* Pods_Editone.framework in Frameworks */,
+				F20D542D2F90BCE700AAC98E /* FirebaseFirestore in Frameworks */,
+				F20D542F2F90BCE700AAC98E /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +142,8 @@
 				F2DE7F4E2F67AA1F00B4F1D8 /* Frameworks */,
 				F2DE7F4F2F67AA1F00B4F1D8 /* Resources */,
 				6D170D1C432E33CDDCF28315 /* [CP] Embed Pods Frameworks */,
+				8C6C7B3E6D3DE24CAC2BFE88 /* [CP] Copy Pods Resources */,
+				F20D508F2F8F2B4900AAC98E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -166,6 +182,9 @@
 			);
 			mainGroup = F2DE7F482F67AA1F00B4F1D8;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F20D54212F90BCE700AAC98E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F2DE7F522F67AA1F00B4F1D8 /* Products */;
 			projectDirPath = "";
@@ -208,6 +227,27 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Editone/Pods-Editone-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8C6C7B3E6D3DE24CAC2BFE88 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Editone/Pods-Editone-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Editone/Pods-Editone-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Editone/Pods-Editone-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C0334A30355485299A806FDC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,6 +270,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F20D508F2F8F2B4900AAC98E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}.debug.dylib",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -251,6 +314,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8D98ATN359;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -258,7 +322,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Editone;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Editone uses the microphone to record audio for creating and editing music files. For example, you can record sound or voice directly in the app and add it to your audio project.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Editone uses your photo library to select and set a cover image for your audio files. For example, you can choose a photo from your library to use as the artwork for your music.";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "To provide a personalized experience, please allow us to monitor your app usage. Your data will only be used for improving our services and providing relevant content.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -300,7 +363,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Editone;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Editone uses the microphone to record audio for creating and editing music files. For example, you can record sound or voice directly in the app and add it to your audio project.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Editone uses your photo library to select and set a cover image for your audio files. For example, you can choose a photo from your library to use as the artwork for your music.";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "To provide a personalized experience, please allow us to monitor your app usage. Your data will only be used for improving our services and providing relevant content.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -361,7 +423,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -468,6 +530,55 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F20D54212F90BCE700AAC98E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F20D54222F90BCE700AAC98E /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F20D54212F90BCE700AAC98E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F20D54242F90BCE700AAC98E /* FirebaseAnalyticsCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F20D54212F90BCE700AAC98E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsCore;
+		};
+		F20D54262F90BCE700AAC98E /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F20D54212F90BCE700AAC98E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		F20D54282F90BCE700AAC98E /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F20D54212F90BCE700AAC98E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		F20D542A2F90BCE700AAC98E /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F20D54212F90BCE700AAC98E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		F20D542C2F90BCE700AAC98E /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F20D54212F90BCE700AAC98E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		F20D542E2F90BCE700AAC98E /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F20D54212F90BCE700AAC98E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F2DE7F492F67AA1F00B4F1D8 /* Project object */;
 }

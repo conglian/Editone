@@ -187,16 +187,19 @@ class EoMusicVC: BaseViewController, AVAudioPlayerDelegate {
     }
     
     @objc func handlePlaySender() {
-        guard let player = audioPlayer else { return }
-        music_Label.text = player.url?.deletingPathExtension().lastPathComponent ?? ""
-        if player.isPlaying {
-            player.pause()
-            play_btn.isSelected = true
-        } else {
-            player.play()
-            play_btn.isSelected = false
+        GADInterstitialAdManager.share.adDidCloseHandler = { [weak self] in
+            guard let player = self?.audioPlayer else { return }
+            self?.music_Label.text = player.url?.deletingPathExtension().lastPathComponent ?? ""
+                if player.isPlaying {
+                    player.pause()
+                    self?.play_btn.isSelected = true
+                } else {
+                    player.play()
+                    self?.play_btn.isSelected = false
+                }
+            self?.musicBlock?(player.isPlaying, player.url?.deletingPathExtension().lastPathComponent ?? "")
         }
-        musicBlock?(player.isPlaying, player.url?.deletingPathExtension().lastPathComponent ?? "")
+        GADInterstitialAdManager.share.showAdIfAvailable(from: self)
     }
     
     // MARK: - Slider Actions

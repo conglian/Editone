@@ -43,17 +43,17 @@ class RecorderManager {
     func setup(delegate: RecorderManagerDelegate) {
         self.delegate = delegate
         // マイクの許可を取る
-        sessionHandler.requestPermission { [weak self] granted in
-            guard let self = self, granted else { return }
-            // セッションをアクティブ
-            self.sessionHandler.setActive()
-            // 音声ファイルを用意する
-            let fileUrl = self.fileHandler.fileUrl(fileName: self.recordFileName)!
-            self.originalFileUrl = fileUrl
-            // レコーダーをセットアップ
-            self.recorderHandler.setup(url: fileUrl, delegate: self)
-            print(fileUrl)
-        }
+//        sessionHandler.requestPermission { [weak self] granted in
+//            guard let self = self, granted else { return }
+//            // セッションをアクティブ
+//            self.sessionHandler.setActive()
+//            // 音声ファイルを用意する
+//            let fileUrl = self.fileHandler.fileUrl(fileName: self.recordFileName)!
+//            self.originalFileUrl = fileUrl
+//            // レコーダーをセットアップ
+//            self.recorderHandler.setup(url: fileUrl, delegate: self)
+//            print(fileUrl)
+//        }
     }
     
     // 収録を開始

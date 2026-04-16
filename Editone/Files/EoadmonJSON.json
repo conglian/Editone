@@ -1,0 +1,37 @@
+{
+  "qycqtozu": 40,
+  "xczhtpce": 15,
+  "kdmxhsla": 12,
+  "edoen_elaunch": [
+    {
+      "xczhtpce": "ca-app-pub-7744353666835825/1458213635",
+      "mahnxlvn": "admob",
+      "tmelvbcd": "open",
+      "danczyct": 13800,
+      "edguhrky": 3
+      }
+  ],
+  "edoen_int_emain": [
+    {
+      "xczhtpce": "ca-app-pub-7744353666835825/4004485926",
+      "mahnxlvn": "admob",
+      "tmelvbcd": "interstitial",
+      "danczyct": 3000,
+      "edguhrky": 3
+    },
+    {
+      "xczhtpce": "ca-app-pub-7744353666835825/9667876149",
+      "mahnxlvn": "admob",
+      "tmelvbcd": "interstitial",
+      "danczyct": 3000,
+      "edguhrky": 2
+     },
+    {
+      "xczhtpce": "ca-app-pub-7744353666835825/4822743573",
+      "mahnxlvn": "admob",
+      "tmelvbcd": "interstitial",
+      "danczyct": 3000,
+      "edguhrky": 1
+     }
+  ]
+}

@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-import AVFAudio
+internal import AVFAudio
 
 class EoRecordVC: BaseViewController {
     
@@ -165,7 +165,12 @@ class EoRecordVC: BaseViewController {
         navBar.wr_setLeftButton(image: UIImage(named: "eo_close_btn")!)
         
         navBar.onClickLeftButton = { [weak self] in
-            self?.dismiss(animated: true)
+            GADInterstitialAdManager.share.adDidCloseHandler = { [weak self] in
+                self?.dismiss(animated: true)
+
+            }
+            GADInterstitialAdManager.share.showAdIfAvailable(from: self ?? UIViewController())
+            
         }
         
         navBar.onClickRightButton = { [weak self] in
