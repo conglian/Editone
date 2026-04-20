@@ -72,10 +72,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        MobileAds.shared.requestConfiguration.testDeviceIdentifiers = [ "a484f9c25ed05d0c62b12bc34072f49f" ];
+//        MobileAds.shared.requestConfiguration.testDeviceIdentifiers = [ "b6f34f74c505986b6131ec19d105f7b0" ];
     }
     
     func setupSVProgressHUD() {
+        UserDefaults.standard.set(nil, forKey: "LastAdShowTime")
+        UserDefault.isLuach_show_ad = false;
+        UserDefault.isLuach_time_end = false;
+        UserDefault.luanch_ad_wating = false
         // HUD 不拦截触摸
         SVProgressHUD.setDefaultMaskType(.none)
         

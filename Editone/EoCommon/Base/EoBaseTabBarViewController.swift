@@ -8,6 +8,7 @@ import UIKit
 class TabBarButton: UIButton {
 
     var imageSize: CGSize = CGSize(width: 40, height: 40)
+    
     var spacing: CGFloat = 6 // 图片和文字间距
 
     override func layoutSubviews() {

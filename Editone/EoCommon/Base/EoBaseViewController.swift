@@ -96,10 +96,7 @@ class BaseViewController: UIViewController , UITableViewDelegate, UITableViewDat
         if self.navigationController?.children.count != 1 {
             navBar.wr_setLeftButton(image: UIImage(named: "eo_back_icon")!)
         }
-        
-        navBar.onClickLeftButton = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
+    
     }
     
     @objc fileprivate func back()

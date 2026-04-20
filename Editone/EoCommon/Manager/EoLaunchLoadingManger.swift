@@ -78,9 +78,24 @@ extension EoLaunchLoadingManger {
     
     @objc func startupForeGround() {
         Eo_Log("[loading] 热启动进入前台")
+        // 延迟 0.5 秒执行的代码
+        if UserDefault.isLuach_show_ad == false && UserDefault.isIntsll_show_ad == false && UserDefault.isLuach_time_end == true {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                GADAppOpenAdManager.share.adDidCloseHandler = {}
+                GADAppOpenAdManager.share.showAdIfAvailable(from: UIApplication.shared.currentKeyWindow?.rootViewController ?? UIViewController())
+            }
+        }
+        // 冷启动 开屏加载成功未显示，进入首页立即展示
+        if UserDefault.luanch_ad_wating == true {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                GADAppOpenAdManager.share.adDidCloseHandler = {}
+                GADAppOpenAdManager.share.showAdIfAvailable(from: UIApplication.shared.currentKeyWindow?.rootViewController ?? UIViewController())
+            }         }
+     
     }
     
     @objc func startupBackGround() {
         Eo_Log("[loading] 进入后台")
     }
 }
+

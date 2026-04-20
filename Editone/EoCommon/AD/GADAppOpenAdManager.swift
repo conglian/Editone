@@ -82,7 +82,7 @@ class GADAppOpenAdManager: NSObject {
         let adUnitID = model.xczhtpce ?? "ca-app-pub-7744353666835825/1458213635"
         
         currentIndex += 1
-        Eo_Log("[Ad begin load GADAppOpenAd \(currentIndex)]")
+        Eo_Log("[Ad begin load Adid=\(adUnitID) weight=\(Int(model.edguhrky ?? 0)) GADAppOpenAd \(currentIndex)]")
         self.editone_open = model
         
         let request = Request()
@@ -115,6 +115,20 @@ class GADAppOpenAdManager: NSObject {
     
     // MARK: - 展示广告（外部调用）
     func showAdIfAvailable(from rootVC: UIViewController) -> Bool {
+        // ❗️关键保护
+        guard UIApplication.shared.applicationState == .active else {
+            print("❌ App not active, skip show")
+            return false
+        }
+        // 无缓存 下次触发ad场景在此请求
+        if self.appOpenAd == nil && self.currentIndex >= EoADManager.share.adModel?.edoen_elaunch?.count ?? 0 {
+            self.currentIndex = 0
+            currentIndex = 0
+            appOpenAd = nil
+            loadTime = nil
+            isLoading = false
+            self.loadNextAd()
+        }
         // 判断是否有广告可用
         guard isAdAvailable(), let ad = appOpenAd else {
             Eo_Log("❌ No ad available to show")
@@ -170,6 +184,8 @@ extension GADAppOpenAdManager: FullScreenContentDelegate {
     
     func adWillPresentFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("App open ad will present")
+        
+        UserDefault.isLuach_show_ad = true;
         isPlayMusicing = EoMusicVC.shared.audioPlayer?.isPlaying ?? false
         if isPlayMusicing {
             EoMusicVC.shared.audioPlayer?.pause()
@@ -182,6 +198,12 @@ extension GADAppOpenAdManager: FullScreenContentDelegate {
         // 更新 lastShowTime 在广告关闭后
         UserDefaults.standard.set(Date(), forKey: lastShowTimeKey)
         
+        UserDefault.luanch_ad_wating = false
+        
+        UserDefault.isLuach_show_ad = false;
+        
+        UserDefault.isLuach_time_end = true;
+
         NotificationCenter.default.post(name: EO_NOTIFICATION_LOADING_FINISHED, object: nil)
         if isPlayMusicing {
             EoMusicVC.shared.audioPlayer?.play()

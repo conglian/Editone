@@ -66,12 +66,11 @@ class BaseWebViewController: BaseViewController {
 
     private func bindEvent() {
         navBarView.popClickHandler = { [weak self] in
-            guard let self = self else { return }
-            if self.webView.canGoBack {
-                self.webView.goBack()
-            } else {
-                self.navigationController?.popViewController(animated: true)
+            GADInterstitialAdManager.share.adDidCloseHandler = { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             }
+            GADInterstitialAdManager.share.showAdIfAvailable(from: self ?? UIViewController())
+
         }
     }
 }

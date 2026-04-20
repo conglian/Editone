@@ -231,6 +231,15 @@ class EoMusicVC: BaseViewController, AVAudioPlayerDelegate {
     private func configUI() {
         navBar.barBackgroundColor = .bgroundColors
         
+        
+        
+        navBar.onClickLeftButton = { [weak self] in
+            GADInterstitialAdManager.share.adDidCloseHandler = { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            GADInterstitialAdManager.share.showAdIfAvailable(from: self ?? UIViewController())
+        }
+        
         view.addSubview(topimageV)
         topimageV.snp.makeConstraints { make in
             make.leading.top.trailing.equalTo(0)

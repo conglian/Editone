@@ -25,6 +25,13 @@ class EoPlayListVC: BaseViewController {
         
         configUI()
         
+        navBar.onClickLeftButton = { [weak self] in
+            GADInterstitialAdManager.share.adDidCloseHandler = { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            GADInterstitialAdManager.share.showAdIfAvailable(from: self ?? UIViewController())
+        }
+        
     }
     
     func updateData(is_work : Bool, libs : [URL]){

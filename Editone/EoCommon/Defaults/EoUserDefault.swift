@@ -13,6 +13,26 @@ class UserDefault {
         set { UserDefaults.standard.set(newValue, forKey: "NN_isLogin_key") }
     }
     
+    public class var isLuach_show_ad: Bool {
+        get { UserDefaults.standard.bool(forKey: "isLuach_show_ad") }
+        set { UserDefaults.standard.set(newValue, forKey: "isLuach_show_ad") }
+    }
+    
+    public class var isIntsll_show_ad: Bool {
+        get { UserDefaults.standard.bool(forKey: "isIntsll_show_ad") }
+        set { UserDefaults.standard.set(newValue, forKey: "isIntsll_show_ad") }
+    }
+    // 等待显示开屏
+    public class var luanch_ad_wating: Bool {
+        get { UserDefaults.standard.bool(forKey: "luanch_ad_wating") }
+        set { UserDefaults.standard.set(newValue, forKey: "luanch_ad_wating") }
+    }
+    
+    public class var isLuach_time_end: Bool {
+        get { UserDefaults.standard.bool(forKey: "isLuach_time_end") }
+        set { UserDefaults.standard.set(newValue, forKey: "isLuach_time_end") }
+    }
+    
     public class var record_index: Int {
         get { UserDefaults.standard.integer(forKey: "record_index") }
         set { UserDefaults.standard.set(newValue, forKey: "record_index") }

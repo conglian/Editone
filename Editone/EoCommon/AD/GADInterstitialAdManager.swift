@@ -81,8 +81,8 @@ class GADInterstitialAdManager: NSObject {
         let request = Request()
         let adUnitID = model.xczhtpce ?? "ca-app-pub-7744353666835825/4004485926"
         
-        Eo_Log("[Ad begin load GADInterstitialAd1 \(currentIndex)]")
-        
+        Eo_Log("[Ad begin load Adid=\(adUnitID) weight=\(Int(model.edguhrky ?? 0)) GADInterstitialAd1 \(currentIndex)]")
+
         InterstitialAd.load(with: adUnitID, request: request) { [weak self] ad, error in
             guard let self = self else { return }
             
@@ -105,9 +105,22 @@ class GADInterstitialAdManager: NSObject {
     }
     
     func showAdIfAvailable(from rootVC: UIViewController) {
+        // ❗️关键保护
+        guard UIApplication.shared.applicationState == .active else {
+            print("❌ App not active, skip show")
+            return
+        }
+        // 无缓存 下次触发ad场景在此请求
+        if self.interstitial == nil && self.currentIndex >= EoADManager.share.adModel?.edoen_int_emain?.count ?? 0 {
+            currentIndex = 0
+            interstitial = nil
+            loadTime = nil
+            isLoading = false
+            self.updateinterstitial()
+        }
         guard isAdAvailable(), let ad = interstitial else {
 //            Eo_Log("❌ No InterstitialAd available to show")
-            UIApplication.shared.currentKeyWindow?.showToast(text: "❌ No ad available to show")
+//            UIApplication.shared.currentKeyWindow?.showToast(text: "❌ No ad available to show")
             if adDidCloseHandler != nil {
                 adDidCloseHandler!()
             }
@@ -134,6 +147,7 @@ class GADInterstitialAdManager: NSObject {
             return
         }
         
+        UserDefault.isIntsll_show_ad = true
         ad.present(from: rootVC)
     }
 }
@@ -151,6 +165,7 @@ extension GADInterstitialAdManager: FullScreenContentDelegate {
     
     func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("InterstitialAd did dismiss")
+        UserDefault.isIntsll_show_ad = false
         // 更新 lastShowTime
         UserDefaults.standard.set(Date(), forKey: lastShowTimeKey)
         // **重置加载状态**
@@ -287,6 +302,19 @@ class GADInterstitial2AdManager: NSObject {
     }
     
     func showAdIfAvailable(from rootVC: UIViewController) {
+        // ❗️关键保护
+        guard UIApplication.shared.applicationState == .active else {
+            print("❌ App not active, skip show")
+            return
+        }
+        // 无缓存 下次触发ad场景在此请求
+        if self.interstitial == nil && self.currentIndex >= EoADManager.share.adModel?.edoen_int_emain?.count ?? 0 {
+            currentIndex = 0
+            interstitial = nil
+            loadTime = nil
+            isLoading = false
+            self.updateinterstitial()
+        }
         guard isAdAvailable(), let ad = interstitial else {
             Eo_Log("❌ No InterstitialAd2 available to show")
 //            UIApplication.shared.currentKeyWindow?.showToast(text: "❌ No ad available to show")
@@ -313,7 +341,7 @@ class GADInterstitial2AdManager: NSObject {
             }
             return
         }
-        
+        UserDefault.isIntsll_show_ad = true
         ad.present(from: rootVC)
     }
 }
@@ -331,6 +359,7 @@ extension GADInterstitial2AdManager: FullScreenContentDelegate {
     
     func adDidDismissFullScreenContent(_ ad: FullScreenPresentingAd) {
         print("InterstitialAd2 did dismiss")
+        UserDefault.isIntsll_show_ad = false
         UserDefaults.standard.set(Date(), forKey: lastShowTimeKey)
         // **重置加载状态**
         currentIndex = 0

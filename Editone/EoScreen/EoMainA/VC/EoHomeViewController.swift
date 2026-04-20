@@ -134,7 +134,10 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
         initmusic_block()
         
         requestUMPConsent()
+
+
     }
+    
     
     func requestUMPConsent() {
         // 1️⃣ 重置 Consent 信息
@@ -145,12 +148,12 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
         params.isTaggedForUnderAgeOfConsent = false
         
         // 2.1 强制调试设置（必填，否则 georaphy 无效）
-        let debugSettings = DebugSettings()
-        debugSettings.geography = .EEA            // 强制 EEA（用于调试）
-        if let idfv = UIDevice.current.identifierForVendor?.uuidString {
-            debugSettings.testDeviceIdentifiers = [idfv]
-        }
-        params.debugSettings = debugSettings
+//        let debugSettings = DebugSettings()
+//        debugSettings.geography = .EEA            // 强制 EEA（用于调试）
+//        if let idfv = UIDevice.current.identifierForVendor?.uuidString {
+//            debugSettings.testDeviceIdentifiers = [idfv]
+//        }
+//        params.debugSettings = debugSettings
         
         // 3️⃣ 请求更新 Consent 信息
         ConsentInformation.shared.requestConsentInfoUpdate(with: params) { error in
@@ -194,6 +197,8 @@ class EoHomeViewController: BaseViewController, UIDocumentPickerDelegate {
                     print("📌 需要同意（无可展示表单）")
                 case .notRequired:
                     print("📌 不需要同意（无可展示表单）")
+                    print(ASIdentifierManager.shared().advertisingIdentifier)
+                    print("IDFA")
                 case .obtained:
                     print("👍 已同意（无可展示表单）")
                 default:

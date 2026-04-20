@@ -177,18 +177,22 @@ class EoRecordVC: BaseViewController {
             if self?.record_end == false {
                 self?.showToast(text: "Please record the music first.")
             } else {
-                AudioManager.share.saveEndBlocks = { [weak self] file_name in
-                    self?.file_path = file_name
-                    Eo_Log("self?.file_path=\(file_name)")
-                    if self?.saveBlock != nil {
-                        self?.saveBlock!(file_name)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            // 这里的代码将在主线程执行
-                            self?.dismiss(animated: true)
+                GADInterstitialAdManager.share.adDidCloseHandler = { [weak self] in
+                    AudioManager.share.saveEndBlocks = { [weak self] file_name in
+                        self?.file_path = file_name
+                        Eo_Log("self?.file_path=\(file_name)")
+                        if self?.saveBlock != nil {
+                            self?.saveBlock!(file_name)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                // 这里的代码将在主线程执行
+                                self?.dismiss(animated: true)
+                            }
                         }
                     }
+                    AudioManager.share.saveRecording()
+                    
                 }
-                AudioManager.share.saveRecording()
+                GADInterstitialAdManager.share.showAdIfAvailable(from: self ?? UIViewController())
             }
         }
         
@@ -245,6 +249,30 @@ class EoRecordVC: BaseViewController {
         
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // 离开页面时，停止录音与计时，避免后台继续运行
+        // 如果正在录音，先安全停止
+        if stop_btn.isHidden == false { // 正在录音的 UI 状态
+            AudioManager.share.stopRecording()
+            start_btn.isHidden = false
+            tips_Label.isHidden = false
+            stop_btn.isHidden = true
+            proimage.isHidden = true
+        }
+        // 清理计时回调，避免循环引用
+        AudioManager.share.timeBlocks = nil
+        // 如果 AudioManager 内部有计时器，请确保其在 stopRecording 内部被停止。
+    }
+
+    deinit {
+        // 释放前的兜底清理，防止循环引用
+        AudioManager.share.timeBlocks = nil
+        // 若有保存回调在持有 self，也置空
+        AudioManager.share.saveEndBlocks = nil
+        // 确保录音已停止
+        AudioManager.share.stopRecording()
+        print("EoRecordVC deinit")
+    }
+
 }
-
-
